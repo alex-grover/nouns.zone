@@ -1,6 +1,6 @@
 {
   "name": "nouns.zone",
-  "description": "Farcaster client for Nouns",
+  "description": "All things Nouns on Farcaster",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,9 +18,16 @@
   },
   "dependencies": {
     "@alex-grover/styles": "^0.0.1",
+    "@t3-oss/env-nextjs": "^0.7.1",
+    "connectkit": "^1.5.3",
+    "geist": "^1.0.0",
+    "lucide-react": "^0.290.0",
     "next": "14.0.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "viem": "^1.18.0",
+    "wagmi": "^1.4.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@alex-grover/eslint-config": "^0.0.5",
@@ -47,7 +54,8 @@
     "stylelint-config-css-modules": "^4.3.0",
     "stylelint-config-recess-order": "^4.3.0",
     "stylelint-config-standard": "^34.0.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vercel": "^32.5.0"
   },
   "postcss": {
     "plugins": [

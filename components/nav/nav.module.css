@@ -1,0 +1,19 @@
+.nav {
+  flex: 0 0 200px;
+  padding: 20px 0;
+  border-right: 1px solid var(--border);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: flex;
+  gap: 12px;
+  padding: 6px 20px;
+}
