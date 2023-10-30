@@ -2,7 +2,7 @@
   --background: #fff;
   --text: #212529;
   --muted: #5b6671;
-  --border: var(--text);
+  --border: #c3c8ce;
   --radius: 8px;
   --radius-full: 9999px;
 }
