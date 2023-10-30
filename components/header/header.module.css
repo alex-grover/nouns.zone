@@ -6,3 +6,13 @@
   padding: 0 20px;
   border-bottom: 1px solid var(--border);
 }
+
+.link {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.logo {
+  height: 32px;
+}
