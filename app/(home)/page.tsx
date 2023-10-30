@@ -3,24 +3,40 @@
 import { FeedResponse } from 'neynar-next/server'
 import { useCallback } from 'react'
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite'
+import Button from '@/components/button'
+import LoadingSpinner from '@/components/loading-spinner'
 import Cast from './cast'
 import styles from './page.module.css'
 
 export default function HomePage() {
-  const { data, isLoading, setSize } = useSWRInfinite<FeedResponse, string>(
-    getKey,
-  )
+  const { data, isLoading, isValidating, setSize } = useSWRInfinite<
+    FeedResponse,
+    string
+  >(getKey)
 
   const loadMore = useCallback(() => {
     void setSize((current) => current + 1)
   }, [setSize])
+
+  if (isLoading)
+    return (
+      <main className={styles.loading}>
+        <LoadingSpinner />
+      </main>
+    )
 
   return (
     <main className={styles.main}>
       {data?.map((page) =>
         page.casts.map((cast) => <Cast key={cast.hash} cast={cast} />),
       )}
-      {isLoading ? 'Loading...' : <button onClick={loadMore}>Load More</button>}
+      <div className={styles.load}>
+        {isValidating ? (
+          <LoadingSpinner />
+        ) : (
+          <Button onClick={loadMore}>Load More</Button>
+        )}
+      </div>
     </main>
   )
 }
