@@ -5,6 +5,7 @@ import { PropsWithChildren } from 'react'
 import Header from '@/components/header'
 import Nav from '@/components/nav'
 import ConnectKitConfig from '@/lib/connectkit'
+import SWRProvider from '@/lib/swr'
 import '@/styles/global.css'
 import '@/styles/theme.css'
 import styles from './layout.module.css'
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <Header />
           <div className={styles.content}>
             <Nav />
-            {children}
+            <SWRProvider>{children}</SWRProvider>
           </div>
         </ConnectKitConfig>
       </body>

@@ -1,6 +1,7 @@
 :root {
   --background: #fff;
   --text: #212529;
+  --muted: #5b6671;
   --border: var(--text);
   --radius: 8px;
   --radius-full: 9999px;

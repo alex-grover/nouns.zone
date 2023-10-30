@@ -2,6 +2,7 @@ import { ActivityIcon, HelpCircleIcon, TextIcon } from 'lucide-react'
 import Link from 'next/link'
 import styles from './nav.module.css'
 
+// TODO: background + bold for current route, hover
 export default function Nav() {
   return (
     <nav className={styles.nav}>

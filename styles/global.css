@@ -1,3 +1,7 @@
+:root {
+  --header-height: 72px;
+}
+
 html,
 body {
   display: flex;

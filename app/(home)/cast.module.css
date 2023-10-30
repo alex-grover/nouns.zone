@@ -1,0 +1,37 @@
+.cast {
+  display: flex;
+  gap: 10px;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pfp {
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+}
+
+.author {
+  display: flex;
+  gap: 10px;
+}
+
+.display {
+  font-weight: bold;
+}
+
+.username {
+  color: var(--muted);
+}
+
+.reactions {
+  display: flex;
+  gap: 32px;
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.reaction {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}

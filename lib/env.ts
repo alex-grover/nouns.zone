@@ -5,6 +5,11 @@ const env = createEnv({
   client: {
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().min(1),
   },
+  server: {
+    NEYNAR_API_KEY: z.string().min(1),
+    FARCASTER_ID: z.string().pipe(z.coerce.bigint()),
+    FARCASTER_MNEMONIC: z.string().min(1),
+  },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID:
       process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
