@@ -29,9 +29,9 @@ export default function HomePage() {
 
   if (isLoading)
     return (
-      <main className={styles.loading}>
+      <div className={styles.loading}>
         <LoadingSpinner />
-      </main>
+      </div>
     )
 
   return (
