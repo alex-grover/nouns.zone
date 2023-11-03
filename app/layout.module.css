@@ -1,4 +1,9 @@
-.content {
-  display: flex;
-  flex-grow: 1;
+.main {
+  margin-top: var(--header-height);
+}
+
+@media (--tablet-portrait-up) {
+  .main {
+    margin-left: var(--nav-width);
+  }
 }

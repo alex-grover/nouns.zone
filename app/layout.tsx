@@ -20,13 +20,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body className={GeistSans.className}>
         <ConnectKitConfig>
-          <NavProvider>
-            <Header />
-            <div className={styles.content}>
+          <SWRProvider>
+            <NavProvider>
+              <Header />
               <Nav />
-              <SWRProvider>{children}</SWRProvider>
-            </div>
-          </NavProvider>
+              <main className={styles.main}>{children}</main>
+            </NavProvider>
+          </SWRProvider>
         </ConnectKitConfig>
       </body>
     </html>

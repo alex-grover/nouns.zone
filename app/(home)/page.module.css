@@ -5,11 +5,6 @@
   margin-top: 56px;
 }
 
-.main {
-  max-height: calc(100vh - var(--header-height));
-  overflow-y: scroll;
-}
-
 .load {
   display: flex;
   align-items: center;

@@ -35,7 +35,7 @@ export default function HomePage() {
     )
 
   return (
-    <main className={styles.main}>
+    <>
       {data?.map((page) =>
         page.casts.map((cast) => <Cast key={cast.hash} cast={cast} />),
       )}
@@ -47,7 +47,7 @@ export default function HomePage() {
       >
         <LoadingSpinner />
       </div>
-    </main>
+    </>
   )
 }
 
