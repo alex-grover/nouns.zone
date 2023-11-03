@@ -19,7 +19,7 @@ export default function Nav() {
   return (
     <nav className={styles.nav} data-open={open}>
       <button onClick={handleClose} className={styles.close}>
-        <XIcon size={16} />
+        <XIcon />
       </button>
       <ol className={styles.list}>
         <li>

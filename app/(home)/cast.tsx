@@ -27,7 +27,6 @@ export default function Cast({ cast }: CastProps) {
           alt="PFP"
           width="30"
           height="30"
-          objectFit="cover"
           className={styles.pfp}
         />
         <div>

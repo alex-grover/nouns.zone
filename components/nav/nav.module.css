@@ -17,6 +17,7 @@
 .close {
   align-self: flex-end;
   padding: 0;
+  color: var(--text);
   cursor: pointer;
   background: none;
   border: 0;

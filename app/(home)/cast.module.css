@@ -3,6 +3,7 @@
   align-items: flex-start;
   justify-content: space-between;
   padding: 20px;
+  word-break: break-word;
   border-bottom: 1px solid var(--border);
 }
 
@@ -14,6 +15,7 @@
 .pfp {
   flex-shrink: 0;
   border-radius: var(--radius-full);
+  object-fit: cover;
 }
 
 .author {
