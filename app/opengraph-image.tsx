@@ -3,28 +3,29 @@ import { ImageResponse } from 'next/og'
 export const runtime = 'edge'
 
 export const size = {
-  width: 180,
-  height: 180,
+  width: 1200,
+  height: 630,
 }
 
 export const contentType = 'image/png'
 
-export default function Icon() {
+export default function Image() {
   return new ImageResponse(
     (
       <div
         style={{
+          fontSize: 128,
           background: 'white',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'space-around',
         }}
       >
         <svg
-          width="160"
-          height="60"
+          width="320"
+          height="120"
           viewBox="0 0 160 60"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -68,11 +69,9 @@ export default function Icon() {
           <path d="M90 50H30V60H90V50Z" fill="#f3322c" />
           <path d="M160 50H100V60H160V50Z" fill="#f3322c" />
         </svg>
+        <div>nouns.zone</div>
       </div>
     ),
-    {
-      width: 180,
-      height: 180,
-    },
+    size,
   )
 }
