@@ -13,6 +13,9 @@ import styles from './layout.module.css'
 export const metadata: Metadata = {
   title: 'nouns.zone',
   description: 'All things Nouns on Farcaster',
+  openGraph: {
+    title: 'nouns.zone',
+  },
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
