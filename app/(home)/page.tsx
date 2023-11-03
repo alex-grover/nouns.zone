@@ -1,22 +1,31 @@
 'use client'
 
 import { FeedResponse } from 'neynar-next/server'
-import { useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite'
-import Button from '@/components/button'
 import LoadingSpinner from '@/components/loading-spinner'
 import Cast from './cast'
 import styles from './page.module.css'
 
 export default function HomePage() {
-  const { data, isLoading, isValidating, setSize } = useSWRInfinite<
-    FeedResponse,
-    string
-  >(getKey)
+  const { data, isLoading, setSize } = useSWRInfinite<FeedResponse, string>(
+    getKey,
+  )
 
-  const loadMore = useCallback(() => {
-    void setSize((current) => current + 1)
-  }, [setSize])
+  const [element, setElement] = useState<HTMLDivElement | null>(null)
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries
+        .filter((entry) => entry.isIntersecting)
+        .forEach(() => void setSize((current) => current + 1))
+    })
+
+    if (element) observer.observe(element)
+
+    return () => {
+      if (element) observer.unobserve(element)
+    }
+  }, [setSize, element])
 
   if (isLoading)
     return (
@@ -30,12 +39,13 @@ export default function HomePage() {
       {data?.map((page) =>
         page.casts.map((cast) => <Cast key={cast.hash} cast={cast} />),
       )}
-      <div className={styles.load}>
-        {isValidating ? (
-          <LoadingSpinner />
-        ) : (
-          <Button onClick={loadMore}>Load More</Button>
-        )}
+      <div
+        className={styles.load}
+        ref={(ref) => {
+          setElement(ref)
+        }}
+      >
+        <LoadingSpinner />
       </div>
     </main>
   )
