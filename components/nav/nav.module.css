@@ -1,14 +1,32 @@
 .nav {
+  display: none;
   flex: 0 0 220px;
-  padding: 20px 0;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 8px;
+  background: var(--background);
   border-right: 1px solid var(--border);
+}
+
+.nav[data-open='true'] {
+  position: fixed;
+  inset: 0;
+  display: flex;
+}
+
+.close {
+  align-self: flex-end;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 8px;
+  padding: 0;
   list-style: none;
 }
 
@@ -22,4 +40,23 @@
 .link[data-selected='true'] {
   font-weight: bold;
   background-color: var(--background-secondary);
+}
+
+.button {
+  padding: 8px 12px;
+}
+
+@media (--tablet-portrait-up) {
+  .nav {
+    position: static;
+    display: block;
+  }
+
+  .close {
+    display: none;
+  }
+
+  .button {
+    display: none;
+  }
 }

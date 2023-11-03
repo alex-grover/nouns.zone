@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: 20px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -76,4 +76,10 @@
 
 .arrow {
   fill: var(--background);
+}
+
+@media (--tablet-portrait-up) {
+  .cast {
+    padding: 20px 40px;
+  }
 }

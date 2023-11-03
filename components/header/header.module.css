@@ -14,5 +14,38 @@
 }
 
 .logo {
-  height: 32px;
+  height: 24px;
+}
+
+.brand {
+  font-size: 24px;
+}
+
+.button {
+  display: none;
+}
+
+.menu {
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+@media (--tablet-portrait-up) {
+  .logo {
+    height: 32px;
+  }
+
+  .brand {
+    font-size: 32px;
+  }
+
+  .button {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+  }
 }
