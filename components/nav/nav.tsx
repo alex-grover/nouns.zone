@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  ActivityIcon,
-  ExternalLinkIcon,
-  HelpCircleIcon,
-  TextIcon,
-} from 'lucide-react'
+import { ExternalLinkIcon, HelpCircleIcon, TextIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import styles from './nav.module.css'
@@ -24,16 +19,6 @@ export default function Nav() {
           >
             <TextIcon />
             <span>Discussion</span>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/activity"
-            className={styles.link}
-            data-selected={pathname === '/activity'}
-          >
-            <ActivityIcon />
-            <span>Activity</span>
           </Link>
         </li>
         <li>
