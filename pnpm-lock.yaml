@@ -32,6 +32,9 @@ dependencies:
   next:
     specifier: 14.0.1
     version: 14.0.1(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+  next-themes:
+    specifier: 1.0.0-beta.0
+    version: 1.0.0-beta.0(next@14.0.1)(react-dom@18.2.0)(react@18.2.0)
   neynar-next:
     specifier: ^0.3.1
     version: 0.3.1(next@14.0.1)(react-dom@18.2.0)(react@18.2.0)(viem@1.18.0)
@@ -7967,6 +7970,21 @@ packages:
         integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==,
       }
     dev: true
+
+  /next-themes@1.0.0-beta.0(next@14.0.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-DitiYQqduW+m/e6WF7LjuIlvh1O8z0tgStGdwGZa27+R47v9xz/4tgq1NH0y6xQqhbm9/ao3yZQS4Hbcy3/OFw==,
+      }
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 14.0.1(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /next@14.0.1(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0):
     resolution:

@@ -26,6 +26,7 @@
     "geist": "^1.0.0",
     "lucide-react": "^0.290.0",
     "next": "14.0.1",
+    "next-themes": "1.0.0-beta.0",
     "neynar-next": "^0.3.1",
     "react": "^18",
     "react-dom": "^18",

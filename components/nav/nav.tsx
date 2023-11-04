@@ -4,12 +4,14 @@ import { ConnectKitButton } from 'connectkit'
 import { ExternalLinkIcon, HelpCircleIcon, TextIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTheme } from 'next-themes'
 import { useCallback } from 'react'
 import { useNav } from '@/components/nav/nav-provider'
 import styles from './nav.module.css'
 
 export default function Nav() {
   const pathname = usePathname()
+  const { resolvedTheme } = useTheme()
   const { open, setOpen } = useNav()
 
   const handleClose = useCallback(() => {
@@ -52,7 +54,7 @@ export default function Nav() {
         </li>
       </ol>
       <div className={styles.button}>
-        <ConnectKitButton mode="light" />
+        <ConnectKitButton mode={resolvedTheme === 'light' ? 'light' : 'dark'} />
       </div>
     </nav>
   )

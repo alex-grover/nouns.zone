@@ -10,6 +10,14 @@
     0px 10px 20px -15px rgb(0 0 0 / 20%);
 }
 
+[data-theme='dark'] {
+  --background: black;
+  --background-secondary: #1e1e1e;
+  --text: #dedad6;
+  --muted: #a4998e;
+  --border: #3c3731;
+}
+
 body {
   color: var(--text);
   background: var(--background);
