@@ -1,4 +1,5 @@
 import '@alex-grover/styles/reset.css'
+import { Analytics } from '@vercel/analytics/react'
 import { GeistSans } from 'geist/font'
 import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             </NavProvider>
           </SWRProvider>
         </ConnectKitConfig>
+        <Analytics />
       </body>
     </html>
   )

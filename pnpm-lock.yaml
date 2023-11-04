@@ -14,6 +14,9 @@ dependencies:
   '@t3-oss/env-nextjs':
     specifier: ^0.7.1
     version: 0.7.1(typescript@5.2.2)(zod@3.22.4)
+  '@vercel/analytics':
+    specifier: ^1.1.1
+    version: 1.1.1
   connectkit:
     specifier: ^1.5.3
     version: 1.5.3(@babel/core@7.23.2)(react-dom@18.2.0)(react-is@16.13.1)(react@18.2.0)(viem@1.18.0)(wagmi@1.4.5)
@@ -2818,6 +2821,15 @@ packages:
         integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==,
       }
     dev: true
+
+  /@vercel/analytics@1.1.1:
+    resolution:
+      {
+        integrity: sha512-+NqgNmSabg3IFfxYhrWCfB/H+RCUOCR5ExRudNG2+pcRehq628DJB5e1u1xqwpLtn4pAYii4D98w7kofORAGQA==,
+      }
+    dependencies:
+      server-only: 0.0.1
+    dev: false
 
   /@vercel/build-utils@7.2.2:
     resolution:
@@ -9702,6 +9714,13 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+
+  /server-only@0.0.1:
+    resolution:
+      {
+        integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==,
+      }
+    dev: false
 
   /set-blocking@2.0.0:
     resolution:

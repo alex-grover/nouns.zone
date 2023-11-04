@@ -45,7 +45,7 @@ export default function Nav() {
           </Link>
         </li>
         <li>
-          <a href="https://nouns.wtf" className={styles.link}>
+          <a href="https://nouns.wtf" target="_blank" className={styles.link}>
             <ExternalLinkIcon />
             <span>Nouns DAO</span>
           </a>
