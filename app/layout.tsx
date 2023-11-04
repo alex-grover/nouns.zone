@@ -1,7 +1,7 @@
 import '@alex-grover/styles/reset.css'
 import { Analytics } from '@vercel/analytics/react'
 import { GeistSans } from 'geist/font'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { PropsWithChildren } from 'react'
 import Header from '@/components/header'
 import Nav, { NavProvider } from '@/components/nav'
@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'nouns.zone',
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: 'white',
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
