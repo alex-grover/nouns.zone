@@ -6,6 +6,7 @@ import { PropsWithChildren } from 'react'
 import Header from '@/components/header'
 import Nav, { NavProvider } from '@/components/nav'
 import ConnectKitConfig from '@/lib/connectkit'
+import NeynarProvider from '@/lib/neynar/client'
 import SWRProvider from '@/lib/swr'
 import ThemeProvider from '@/lib/theme'
 import '@/styles/global.css'
@@ -24,17 +25,19 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={GeistSans.className}>
-        <ConnectKitConfig>
+        <ThemeProvider>
           <SWRProvider>
-            <ThemeProvider>
-              <NavProvider>
-                <Header />
-                <Nav />
-                <main className={styles.main}>{children}</main>
-              </NavProvider>
-            </ThemeProvider>
+            <NeynarProvider>
+              <ConnectKitConfig>
+                <NavProvider>
+                  <Header />
+                  <Nav />
+                  <main className={styles.main}>{children}</main>
+                </NavProvider>
+              </ConnectKitConfig>
+            </NeynarProvider>
           </SWRProvider>
-        </ConnectKitConfig>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
