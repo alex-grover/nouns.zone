@@ -1,8 +1,7 @@
 .button {
   padding: 8px 24px;
-  color: var(--background);
   cursor: pointer;
-  background: var(--text);
+  background: var(--background-secondary);
   border: 0;
   border-radius: var(--radius);
 }
