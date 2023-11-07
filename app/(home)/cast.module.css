@@ -46,6 +46,7 @@
 
 .trigger {
   flex-shrink: 0;
+  padding: 0;
   color: var(--muted);
   cursor: pointer;
   background: none;
