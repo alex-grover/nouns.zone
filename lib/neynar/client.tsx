@@ -102,7 +102,7 @@ export default function NeynarProvider({ children }: PropsWithChildren) {
   const signIn = useCallback(async () => {
     setSigner(null)
 
-    const response = await fetch('/api/signer', { method: 'POST' })
+    const response = await fetch('/api/signer', { method: 'PUT' })
     const signer = (await response.json()) as Signer
 
     setSigner(signer)

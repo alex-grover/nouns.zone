@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
 import Header from '@/components/header'
 import Nav, { NavProvider } from '@/components/nav'
+import QRCodeDialog from '@/components/qr-code-dialog'
 import ConnectKitConfig from '@/lib/connectkit'
 import NeynarProvider from '@/lib/neynar/client'
 import SWRProvider from '@/lib/swr'
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   <Header />
                   <Nav />
                   <main className={styles.main}>{children}</main>
+                  <QRCodeDialog />
                 </NavProvider>
               </ConnectKitConfig>
             </NeynarProvider>

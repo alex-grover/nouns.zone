@@ -1,0 +1,38 @@
+.button {
+  display: flex;
+  gap: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: var(--background-secondary);
+  border: 0;
+  border-radius: var(--radius);
+}
+
+.avatar {
+  border-radius: var(--radius-full);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 150px;
+  padding: 10px 20px;
+  background: var(--background);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.arrow {
+  fill: var(--background);
+}

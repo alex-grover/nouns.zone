@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(signer)
 }
 
-export async function POST(request: NextRequest) {
+export async function PUT(request: NextRequest) {
   const { address } = await Session.fromCookies(request.cookies)
   if (!address) return new Response('Unauthorized', { status: 401 })
 
@@ -27,7 +27,10 @@ export async function POST(request: NextRequest) {
     .selectAll()
     .where('address', '=', address)
     .executeTakeFirst()
-  if (user) return new Response('User already has a signer', { status: 422 })
+  if (user) {
+    const signer = await neynarClient.getSigner(user.signer_uuid)
+    return NextResponse.json(signer, { status: 202 })
+  }
 
   const signer = await neynarClient.createSigner()
   await db
