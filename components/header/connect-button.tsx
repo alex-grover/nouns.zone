@@ -36,7 +36,6 @@ export default function ConnectButton() {
   }, [signOut, clearSigner])
 
   if (signer?.status === 'approved' && data) {
-    // TODO: not a dropdown on mobile
     return (
       <DropdownMenu.Root>
         <DropdownMenu.Trigger className={styles.button}>
@@ -50,7 +49,6 @@ export default function ConnectButton() {
           @{data.username}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className={styles.menu}>
-          {/* TODO: icons, functionality */}
           <DropdownMenu.Item asChild>
             <Link href={`/users/${data.username}`} className={styles.item}>
               <UserIcon />

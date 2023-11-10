@@ -6,8 +6,8 @@
   z-index: 10;
   display: none;
   flex-direction: column;
-  gap: 12px;
-  padding: 20px 8px;
+  justify-content: space-between;
+  padding: 0 8px 12px;
   background: var(--background);
   border-right: 1px solid var(--border);
 }
@@ -18,8 +18,25 @@
   display: flex;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 12px 0 0;
+}
+
+.user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: var(--radius-full);
+}
+
 .close {
-  align-self: flex-end;
   padding: 0;
   color: var(--text);
   cursor: pointer;
@@ -47,21 +64,19 @@
   background-color: var(--background-secondary);
 }
 
-.button {
-  padding: 8px 12px;
-}
-
 @media (--tablet-portrait-up) {
   .nav {
     display: block;
     width: var(--nav-width);
+    padding-top: 20px;
   }
 
-  .close {
+  .header {
     display: none;
   }
 
-  .button {
+  .user,
+  .buttons {
     display: none;
   }
 }

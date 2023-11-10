@@ -3,9 +3,9 @@
 import { MenuIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useCallback } from 'react'
-import ConnectButton from '@/components/connect-button'
 import { useNav } from '@/components/nav'
 import Noggles from '@/components/noggles'
+import ConnectButton from './connect-button'
 import styles from './header.module.css'
 
 export default function Header() {
