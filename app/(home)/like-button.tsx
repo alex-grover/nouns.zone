@@ -1,6 +1,9 @@
+import { useModal, useSIWE } from 'connectkit'
 import { HeartIcon } from 'lucide-react'
 import type { Cast } from 'neynar-next/server'
 import { HTMLAttributes, useCallback, useState } from 'react'
+import { toast } from 'sonner'
+import { useAccount } from 'wagmi'
 import { useSigner } from '@/lib/neynar/client'
 import styles from './like-button.module.css'
 
@@ -9,6 +12,10 @@ type LikeButtonProps = HTMLAttributes<HTMLSpanElement> & {
 }
 
 export default function LikeButton({ cast, ...props }: LikeButtonProps) {
+  const { address } = useAccount()
+  const { setOpen, openSIWE } = useModal()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { isSignedIn } = useSIWE()
   const { signer } = useSigner()
 
   const [liked, setLiked] = useState(
@@ -19,6 +26,12 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
   const [likeCount, setLikeCount] = useState(cast.reactions.likes.length)
 
   const handleLike = useCallback(() => {
+    if (signer?.status !== 'approved') {
+      if (!address) setOpen(true)
+      else if (!isSignedIn) openSIWE()
+      return
+    }
+
     async function execute() {
       try {
         setLiked(true)
@@ -27,7 +40,7 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
       } catch (e) {
         setLiked(false)
         setLikeCount((curr) => curr - 1)
-        // TODO: toast
+        toast.error('Failed to like cast')
       }
     }
 
@@ -43,7 +56,7 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
       } catch (e) {
         setLiked(true)
         setLikeCount((curr) => curr + 1)
-        // TODO: toast
+        toast('Failed to unlike cast')
       }
     }
 
@@ -52,10 +65,7 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
 
   return (
     <span {...props}>
-      <button
-        onClick={liked ? handleUnlike : handleLike}
-        disabled={signer?.status !== 'approved'}
-      >
+      <button onClick={liked ? handleUnlike : handleLike}>
         <HeartIcon size={16} className={styles.icon} data-liked={liked} />
       </button>
       {likeCount}

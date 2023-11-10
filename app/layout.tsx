@@ -10,6 +10,7 @@ import ConnectKitConfig from '@/lib/connectkit'
 import NeynarProvider from '@/lib/neynar/client'
 import SWRProvider from '@/lib/swr'
 import ThemeProvider from '@/lib/theme'
+import ToastConfig from '@/lib/toast'
 import '@/styles/global.css'
 import '@/styles/theme.css'
 import styles from './layout.module.css'
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   <Nav />
                   <main className={styles.main}>{children}</main>
                   <QRCodeDialog />
+                  <ToastConfig />
                 </NavProvider>
               </ConnectKitConfig>
             </NeynarProvider>
