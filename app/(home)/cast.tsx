@@ -5,12 +5,12 @@ import {
   ExternalLinkIcon,
   MessageCircleIcon,
   MoreVerticalIcon,
-  RepeatIcon,
 } from 'lucide-react'
 import Image from 'next/image'
 import { type Cast } from 'neynar-next/server'
 import styles from './cast.module.css'
 import LikeButton from './like-button'
+import RecastButton from './recast-button'
 
 dayjs.extend(relativeTime)
 
@@ -41,9 +41,7 @@ export default function Cast({ cast }: CastProps) {
             <span className={styles.reaction}>
               <MessageCircleIcon size={16} /> {cast.replies.count}
             </span>
-            <span className={styles.reaction}>
-              <RepeatIcon size={16} /> {cast.reactions.recasts.length}
-            </span>
+            <RecastButton cast={cast} className={styles.reaction} />
             <LikeButton cast={cast} className={styles.reaction} />
           </div>
         </div>

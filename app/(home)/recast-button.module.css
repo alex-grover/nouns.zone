@@ -1,0 +1,9 @@
+.icon {
+  stroke: var(--muted);
+}
+
+.icon[data-recasted='true'] {
+  --color: green;
+
+  stroke: var(--color);
+}
