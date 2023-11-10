@@ -16,6 +16,9 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
+      - run: pnpm generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - run: pnpm check:lint
       - run: pnpm check:format
       - run: pnpm check:styles
