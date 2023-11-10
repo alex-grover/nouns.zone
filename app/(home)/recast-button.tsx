@@ -45,7 +45,7 @@ export default function RecastButton({ cast, ...props }: RecastButtonProps) {
     }
 
     void execute()
-  }, [cast])
+  }, [address, cast.hash, isSignedIn, openSIWE, setOpen, signer?.status])
 
   const handleUnrecast = useCallback(() => {
     async function execute() {
