@@ -5,15 +5,13 @@ import { useSIWE } from 'connectkit'
 import { XIcon } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
-import { useDisconnect } from 'wagmi'
 import { useSigner } from '@/lib/neynar/client'
 import styles from './qr-code-dialog.module.css'
 
 export default function QRCodeDialog() {
   const { signer, signIn } = useSigner()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { isSignedIn } = useSIWE()
-  const { disconnect } = useDisconnect()
+  const { isSignedIn, signOut } = useSIWE()
   const [open, setOpen] = useState(true)
 
   useEffect(() => {
@@ -25,9 +23,10 @@ export default function QRCodeDialog() {
   const handleOpenChange = useCallback(
     (open: boolean) => {
       setOpen(open)
-      if (!open) disconnect()
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      if (!open) signOut()
     },
-    [disconnect],
+    [signOut],
   )
 
   if (signer?.status !== 'pending_approval') return null
@@ -36,15 +35,18 @@ export default function QRCodeDialog() {
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Overlay className={styles.overlay} />
       <Dialog.Content className={styles.content}>
-        <Dialog.Title>Sign In</Dialog.Title>
-        <Dialog.Description>
-          On your mobile device with Warpcast, open the Camera app and scan the
-          QR code.
-        </Dialog.Description>
         <Dialog.Close className={styles.close}>
           <XIcon />
         </Dialog.Close>
-        <QRCode value={signer.signer_approval_url} />
+        <Dialog.Title className={styles.title}>Sign In</Dialog.Title>
+        <Dialog.Description className={styles.description}>
+          On your mobile device with Warpcast, open the Camera app and scan the
+          QR code.
+        </Dialog.Description>
+        <QRCode value={signer.signer_approval_url} className={styles.qr} />
+        <a href={signer.signer_approval_url} target="_blank">
+          Click for link
+        </a>
       </Dialog.Content>
     </Dialog.Root>
   )

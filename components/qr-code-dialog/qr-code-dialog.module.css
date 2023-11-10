@@ -62,3 +62,9 @@
   background: none;
   border: 0;
 }
+
+.title,
+.description,
+.qr {
+  margin-bottom: 10px;
+}

@@ -1,12 +1,11 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { ConnectKitButton, useModal } from 'connectkit'
+import { ConnectKitButton, useModal, useSIWE } from 'connectkit'
 import { LogOutIcon, UserIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { User } from 'neynar-next/server'
 import { useCallback } from 'react'
 import useSWRImmutable from 'swr/immutable'
-import { useDisconnect } from 'wagmi'
 import Button from '@/components/button'
 import { useSigner } from '@/lib/neynar/client'
 import styles from './connect-button.module.css'
@@ -14,7 +13,8 @@ import styles from './connect-button.module.css'
 export default function ConnectButton() {
   const { openSIWE } = useModal()
   const { signer, clearSigner } = useSigner()
-  const { disconnect } = useDisconnect()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { signOut } = useSIWE()
 
   const { data } = useSWRImmutable<User>(
     signer?.status === 'approved' ? `/api/users/${signer.fid}` : null,
@@ -25,10 +25,15 @@ export default function ConnectButton() {
   }, [openSIWE])
 
   const handleSignOut = useCallback(() => {
-    disconnect()
-    clearSigner()
-    // TODO: clear SWR cache?
-  }, [disconnect, clearSigner])
+    async function execute() {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      await signOut()
+      clearSigner()
+      // TODO: clear SWR cache?
+    }
+
+    void execute()
+  }, [signOut, clearSigner])
 
   if (signer?.status === 'approved' && data) {
     // TODO: not a dropdown on mobile
