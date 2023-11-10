@@ -1,10 +1,18 @@
+.button {
+  color: var(--muted);
+
+  --color: #f3322c;
+}
+
+.button[data-liked='true'] {
+  color: var(--color);
+}
+
 .icon {
   stroke: var(--muted);
 }
 
 .icon[data-liked='true'] {
-  --color: red;
-
   fill: var(--color);
   stroke: var(--color);
 }

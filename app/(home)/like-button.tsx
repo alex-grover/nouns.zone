@@ -1,7 +1,7 @@
 import { useModal, useSIWE } from 'connectkit'
 import { HeartIcon } from 'lucide-react'
 import type { Cast } from 'neynar-next/server'
-import { HTMLAttributes, useCallback, useState } from 'react'
+import { HTMLAttributes, useCallback, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import { useAccount } from 'wagmi'
 import { useSigner } from '@/lib/neynar/client'
@@ -17,6 +17,8 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { isSignedIn } = useSIWE()
   const { signer } = useSigner()
+
+  const hasNoggles = useMemo(() => cast.text.includes('⌐◨-◨'), [cast])
 
   const [liked, setLiked] = useState(
     () =>
@@ -65,8 +67,16 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
 
   return (
     <span {...props}>
-      <button onClick={liked ? handleUnlike : handleLike}>
-        <HeartIcon size={16} className={styles.icon} data-liked={liked} />
+      <button
+        onClick={liked ? handleUnlike : handleLike}
+        className={styles.button}
+        data-liked={liked}
+      >
+        {hasNoggles ? (
+          '⌐◨-◨'
+        ) : (
+          <HeartIcon size={16} className={styles.icon} data-liked={liked} />
+        )}
       </button>
       {likeCount}
     </span>
