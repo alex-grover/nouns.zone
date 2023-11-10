@@ -21,7 +21,7 @@ export default function ConnectButton() {
   )
 
   const handleSignIn = useCallback(() => {
-    openSIWE(true)
+    openSIWE()
   }, [openSIWE])
 
   const handleSignOut = useCallback(() => {

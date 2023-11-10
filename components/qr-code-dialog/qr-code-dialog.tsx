@@ -5,13 +5,15 @@ import { useSIWE } from 'connectkit'
 import { XIcon } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
+import { useDisconnect } from 'wagmi'
 import { useSigner } from '@/lib/neynar/client'
 import styles from './qr-code-dialog.module.css'
 
 export default function QRCodeDialog() {
   const { signer, signIn } = useSigner()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { isSignedIn, signOut } = useSIWE()
+  const { isSignedIn } = useSIWE()
+  const { disconnect } = useDisconnect()
   const [open, setOpen] = useState(true)
 
   useEffect(() => {
@@ -23,10 +25,9 @@ export default function QRCodeDialog() {
   const handleOpenChange = useCallback(
     (open: boolean) => {
       setOpen(open)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      if (!open) signOut()
+      if (!open) disconnect()
     },
-    [signOut],
+    [disconnect],
   )
 
   if (signer?.status !== 'pending_approval') return null
