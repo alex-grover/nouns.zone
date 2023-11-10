@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import {
   ExternalLinkIcon,
-  HeartIcon,
   MessageCircleIcon,
   MoreVerticalIcon,
   RepeatIcon,
@@ -11,6 +10,7 @@ import {
 import Image from 'next/image'
 import { type Cast } from 'neynar-next/server'
 import styles from './cast.module.css'
+import LikeButton from './like-button'
 
 dayjs.extend(relativeTime)
 
@@ -44,9 +44,7 @@ export default function Cast({ cast }: CastProps) {
             <span className={styles.reaction}>
               <RepeatIcon size={16} /> {cast.reactions.recasts.length}
             </span>
-            <span className={styles.reaction}>
-              <HeartIcon size={16} /> {cast.reactions.likes.length}
-            </span>
+            <LikeButton cast={cast} className={styles.reaction} />
           </div>
         </div>
       </div>

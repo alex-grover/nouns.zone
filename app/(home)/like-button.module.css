@@ -1,0 +1,10 @@
+.icon {
+  stroke: var(--text);
+}
+
+.icon[data-liked='true'] {
+  --color: red;
+
+  fill: var(--color);
+  stroke: var(--color);
+}

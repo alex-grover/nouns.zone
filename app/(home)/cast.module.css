@@ -44,6 +44,12 @@
   align-items: center;
 }
 
+.reaction > button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
 .trigger {
   flex-shrink: 0;
   padding: 0;
