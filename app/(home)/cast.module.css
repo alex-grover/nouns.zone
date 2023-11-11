@@ -40,6 +40,10 @@
   color: var(--muted);
 }
 
+.text {
+  white-space: pre-wrap;
+}
+
 .reactions {
   display: flex;
   justify-content: space-between;

@@ -63,7 +63,7 @@ export default function Cast({ cast }: CastProps) {
             {' '}
             &bull; {dayjs(cast.timestamp).fromNow(true)}
           </span>
-          <div>{cast.text}</div>
+          <div className={styles.text}>{cast.text}</div>
           <div className={styles.reactions}>
             <span className={styles.reaction}>
               <MessageCircleIcon size={16} /> {cast.replies.count}
