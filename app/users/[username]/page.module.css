@@ -1,0 +1,59 @@
+.container {
+  --padding: 12px;
+}
+
+.user {
+  display: flex;
+  gap: 12px;
+  padding: var(--padding);
+  border-bottom: 1px solid var(--border);
+}
+
+.pfp {
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.username {
+  color: var(--muted);
+}
+
+.follows {
+  display: flex;
+  gap: 12px;
+}
+
+.count {
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--padding);
+}
+
+.link {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  text-decoration: underline;
+}
+
+@media (--tablet-portrait-up) {
+  .container {
+    --padding: 20px;
+  }
+}
