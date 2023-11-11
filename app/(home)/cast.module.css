@@ -9,6 +9,7 @@
 
 .content {
   display: flex;
+  flex-grow: 1;
   gap: 10px;
 }
 
@@ -19,6 +20,10 @@
 .pfp {
   border-radius: var(--radius-full);
   object-fit: cover;
+}
+
+.body {
+  flex-grow: 1;
 }
 
 .author {

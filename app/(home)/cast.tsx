@@ -51,7 +51,7 @@ export default function Cast({ cast }: CastProps) {
             className={styles.pfp}
           />
         </Link>
-        <div>
+        <div className={styles.body}>
           <Link
             href={`/users/${cast.author.username}`}
             className={styles.author}
