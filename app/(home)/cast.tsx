@@ -8,6 +8,7 @@ import {
   MoreVerticalIcon,
 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { type Cast } from 'neynar-next/server'
 import styles from './cast.module.css'
 import LikeButton from './like-button'
@@ -41,21 +42,27 @@ export default function Cast({ cast }: CastProps) {
   return (
     <div className={styles.cast}>
       <div className={styles.content}>
-        <Image
-          src={cast.author.pfp_url}
-          alt="PFP"
-          width="30"
-          height="30"
-          className={styles.pfp}
-        />
+        <Link href={`/users/${cast.author.username}`} className={styles.link}>
+          <Image
+            src={cast.author.pfp_url}
+            alt="PFP"
+            width="30"
+            height="30"
+            className={styles.pfp}
+          />
+        </Link>
         <div>
-          <div className={styles.author}>
+          <Link
+            href={`/users/${cast.author.username}`}
+            className={styles.author}
+          >
             <span className={styles.display}>{cast.author.display_name}</span>
-            <span className={styles.username}>
-              @{cast.author.username} &bull;{' '}
-              {dayjs(cast.timestamp).fromNow(true)}
-            </span>
-          </div>
+            <span className={styles.username}>@{cast.author.username}</span>
+          </Link>
+          <span className={styles.timestamp}>
+            {' '}
+            &bull; {dayjs(cast.timestamp).fromNow(true)}
+          </span>
           <div>{cast.text}</div>
           <div className={styles.reactions}>
             <span className={styles.reaction}>

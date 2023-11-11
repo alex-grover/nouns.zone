@@ -12,14 +12,17 @@
   gap: 10px;
 }
 
-.pfp {
+.link {
   flex-shrink: 0;
+}
+
+.pfp {
   border-radius: var(--radius-full);
   object-fit: cover;
 }
 
 .author {
-  display: flex;
+  display: inline-flex;
   gap: 10px;
 }
 
@@ -27,7 +30,8 @@
   font-weight: bold;
 }
 
-.username {
+.username,
+.timestamp {
   color: var(--muted);
 }
 

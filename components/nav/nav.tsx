@@ -49,7 +49,7 @@ export default function Nav() {
       <div>
         <div className={styles.header}>
           {data ? (
-            <Link href={`/${data.username}`} className={styles.user}>
+            <Link href={`/users/${data.username}`} className={styles.user}>
               <Image
                 src={data.pfp_url}
                 alt="Profile picture"

@@ -40,7 +40,7 @@ export default function HomePage() {
         page.casts.map((cast) => <Cast key={cast.hash} cast={cast} />),
       )}
       <div
-        className={styles.load}
+        className={styles.loader}
         ref={(ref) => {
           setElement(ref)
         }}
