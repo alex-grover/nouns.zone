@@ -1,6 +1,7 @@
 import * as Popover from '@radix-ui/react-popover'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import updateLocale from 'dayjs/plugin/updateLocale'
 import {
   ExternalLinkIcon,
   MessageCircleIcon,
@@ -13,6 +14,24 @@ import LikeButton from './like-button'
 import RecastButton from './recast-button'
 
 dayjs.extend(relativeTime)
+dayjs.extend(updateLocale)
+dayjs.updateLocale('en', {
+  relativeTime: {
+    past: '%s',
+    s: '1s',
+    ss: '%ds',
+    m: '1m',
+    mm: '%dm',
+    h: '1h',
+    hh: '%dh',
+    d: '1d',
+    dd: '%dd',
+    M: '1m',
+    MM: '%dm',
+    y: '1y',
+    yy: '%dy',
+  },
+})
 
 type CastProps = {
   cast: Cast
@@ -33,7 +52,8 @@ export default function Cast({ cast }: CastProps) {
           <div className={styles.author}>
             <span className={styles.display}>{cast.author.display_name}</span>
             <span className={styles.username}>
-              @{cast.author.username} &bull; {dayjs(cast.timestamp).fromNow()}
+              @{cast.author.username} &bull;{' '}
+              {dayjs(cast.timestamp).fromNow(true)}
             </span>
           </div>
           <div>{cast.text}</div>
