@@ -46,6 +46,7 @@
 }
 
 .reaction > button {
+  padding: 0;
   cursor: pointer;
   background: none;
   border: 0;
