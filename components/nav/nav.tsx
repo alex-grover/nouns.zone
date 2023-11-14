@@ -1,7 +1,13 @@
 'use client'
 
 import { useModal, useSIWE } from 'connectkit'
-import { ExternalLinkIcon, HelpCircleIcon, TextIcon, XIcon } from 'lucide-react'
+import {
+  ExternalLinkIcon,
+  GithubIcon,
+  HelpCircleIcon,
+  TextIcon,
+  XIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -96,7 +102,17 @@ export default function Nav() {
           <li>
             <a href="https://nouns.wtf" target="_blank" className={styles.link}>
               <ExternalLinkIcon />
-              <span>Nouns DAO</span>
+              <span>nouns.wtf</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/alex-grover/nouns.zone"
+              target="_blank"
+              className={styles.link}
+            >
+              <GithubIcon />
+              <span>GitHub</span>
             </a>
           </li>
         </ol>
