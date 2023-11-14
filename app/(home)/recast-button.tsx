@@ -1,7 +1,7 @@
 import { useModal, useSIWE } from 'connectkit'
 import { RepeatIcon } from 'lucide-react'
 import type { Cast } from 'neynar-next/server'
-import { HTMLAttributes, useCallback, useState } from 'react'
+import { HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useAccount } from 'wagmi'
 import { useSigner } from '@/lib/neynar/client'
@@ -16,14 +16,21 @@ export default function RecastButton({ cast, ...props }: RecastButtonProps) {
   const { setOpen, openSIWE } = useModal()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { isSignedIn } = useSIWE()
-  const { signer } = useSigner()
+  const { signer, isLoading } = useSigner()
 
-  const [recasted, setRecasted] = useState(
-    () =>
-      signer?.status === 'approved' &&
-      !!cast.reactions.recasts.find((recast) => recast.fid === signer.fid),
-  )
+  const [signerLoaded, setSignerLoaded] = useState(false)
+  const [recasted, setRecasted] = useState(false)
   const [recastCount, setRecastCount] = useState(cast.reactions.recasts.length)
+
+  // Check if the cast is recasted after the signer is loaded
+  useEffect(() => {
+    if (isLoading || signerLoaded || signer?.status !== 'approved') return
+
+    setRecasted(
+      !!cast.reactions.recasts.find((recast) => recast.fid === signer.fid),
+    )
+    setSignerLoaded(true)
+  }, [isLoading, signerLoaded, signer, cast.reactions.recasts])
 
   const handleRecast = useCallback(() => {
     if (signer?.status !== 'approved') {

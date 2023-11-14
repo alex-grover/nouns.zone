@@ -1,7 +1,13 @@
 import { useModal, useSIWE } from 'connectkit'
 import { HeartIcon } from 'lucide-react'
 import type { Cast } from 'neynar-next/server'
-import { HTMLAttributes, useCallback, useMemo, useState } from 'react'
+import {
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { toast } from 'sonner'
 import { useAccount } from 'wagmi'
 import { useSigner } from '@/lib/neynar/client'
@@ -16,16 +22,21 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
   const { setOpen, openSIWE } = useModal()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { isSignedIn } = useSIWE()
-  const { signer } = useSigner()
+  const { signer, isLoading } = useSigner()
 
   const hasNoggles = useMemo(() => cast.text.includes('⌐◨-◨'), [cast])
 
-  const [liked, setLiked] = useState(
-    () =>
-      signer?.status === 'approved' &&
-      !!cast.reactions.likes.find((like) => like.fid === signer.fid),
-  )
+  const [signerLoaded, setSignerLoaded] = useState(false)
+  const [liked, setLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(cast.reactions.likes.length)
+
+  // Check if the cast is liked after the signer is loaded
+  useEffect(() => {
+    if (isLoading || signerLoaded || signer?.status !== 'approved') return
+
+    setLiked(!!cast.reactions.likes.find((like) => like.fid === signer.fid))
+    setSignerLoaded(true)
+  }, [isLoading, signerLoaded, signer, cast.reactions.likes])
 
   const handleLike = useCallback(() => {
     if (signer?.status !== 'approved') {
