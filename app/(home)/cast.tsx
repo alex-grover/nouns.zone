@@ -39,6 +39,9 @@ type CastProps = {
 }
 
 export default function Cast({ cast }: CastProps) {
+  // Users without complete profiles break cast display, and seem to be spam
+  if (!cast.author.username) return null
+
   return (
     <div className={styles.cast}>
       <div className={styles.content}>
