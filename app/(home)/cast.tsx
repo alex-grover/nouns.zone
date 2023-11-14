@@ -10,6 +10,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { type Cast } from 'neynar-next/server'
+import { useMemo } from 'react'
 import styles from './cast.module.css'
 import LikeButton from './like-button'
 import RecastButton from './recast-button'
@@ -39,6 +40,11 @@ type CastProps = {
 }
 
 export default function Cast({ cast }: CastProps) {
+  const imageEmbeds = useMemo(
+    () => cast.embeds.filter((embed) => embed.url.includes('i.imgur.com')),
+    [cast.embeds],
+  )
+
   // Users without complete profiles break cast display, and seem to be spam
   if (!cast.author.username) return null
 
@@ -67,6 +73,20 @@ export default function Cast({ cast }: CastProps) {
             &bull; {dayjs(cast.timestamp).fromNow(true)}
           </span>
           <div className={styles.text}>{cast.text}</div>
+          {imageEmbeds.length > 0 && (
+            <div className={styles.embeds}>
+              {imageEmbeds.map(({ url }) => (
+                <div key={url} className={styles.embed}>
+                  <Image
+                    src={url}
+                    alt="Cast image"
+                    fill
+                    className={styles.image}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
           <div className={styles.reactions}>
             <span className={styles.reaction}>
               <MessageCircleIcon size={16} /> {cast.replies.count}
