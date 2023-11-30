@@ -6,10 +6,11 @@ const env = createEnv({
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().min(1),
   },
   server: {
-    DATABASE_URL: z.string().min(1),
+    DATABASE_URL: z.string().url(),
     FARCASTER_ID: z.string().pipe(z.coerce.bigint()),
     FARCASTER_MNEMONIC: z.string().min(1),
     NEYNAR_API_KEY: z.string().min(1),
+    REPLICATOR_DATABASE_URL: z.string().url(),
     SESSION_SECRET: z.string().min(1),
   },
   experimental__runtimeEnv: {
