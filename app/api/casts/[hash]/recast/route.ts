@@ -29,7 +29,7 @@ export async function POST(request: NextRequest, { params }: Props) {
   if (!parseResult.success)
     return NextResponse.json(parseResult.error.format(), { status: 400 })
 
-  await neynarClient.recastCast(user.signer_uuid, parseResult.data.hash)
+  await neynarClient.recastCast(user.signerUuid, parseResult.data.hash)
 
   return new Response(null, { status: 201 })
 }
@@ -48,7 +48,7 @@ export async function DELETE(request: NextRequest, { params }: Props) {
   if (!parseResult.success)
     return NextResponse.json(parseResult.error.format(), { status: 400 })
 
-  await neynarClient.unrecastCast(user.signer_uuid, parseResult.data.hash)
+  await neynarClient.unrecastCast(user.signerUuid, parseResult.data.hash)
 
   return new Response(null, { status: 204 })
 }

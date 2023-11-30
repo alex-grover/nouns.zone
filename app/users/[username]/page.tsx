@@ -21,9 +21,7 @@ export default async function UserPage({ params }: UserPageProps) {
         .where('address', '=', address)
         .executeTakeFirst()
     : null
-  const signer = viewer
-    ? await neynarClient.getSigner(viewer.signer_uuid)
-    : null
+  const signer = viewer ? await neynarClient.getSigner(viewer.signerUuid) : null
   const viewerFid = signer?.status === 'approved' ? signer.fid : null
   const user = viewerFid
     ? await neynarClient.getUserByUsername(params.username, viewerFid)

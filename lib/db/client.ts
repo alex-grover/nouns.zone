@@ -1,4 +1,4 @@
-import { Kysely, PostgresDialect } from 'kysely'
+import { CamelCasePlugin, Kysely, PostgresDialect } from 'kysely'
 import { Pool } from 'pg'
 import { DB } from '@/lib/db/generated/db'
 import env from '@/lib/env'
@@ -16,6 +16,7 @@ const db = new Kysely<DB>({
       max: 1,
     }),
   }),
+  plugins: [new CamelCasePlugin()],
 })
 
 export default db
