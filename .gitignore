@@ -38,3 +38,5 @@ next-env.d.ts
 # ide
 .idea/
 
+# db
+lib/db/generated/*

@@ -14,7 +14,7 @@
     "fix:styles": "stylelint --fix --cache ./**/*.css",
     "check:types": "tsc",
     "migrate": "tsx lib/db/migrate.ts",
-    "generate": "kysely-codegen --dialect postgres",
+    "generate": "kysely-codegen --dialect postgres --out-file lib/db/generated/db.ts",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -118,6 +118,9 @@
     "extends": [
       "@alex-grover",
       "next/core-web-vitals"
+    ],
+    "ignorePatterns": [
+      "lib/db/generated/*"
     ]
   },
   "prettier": "@alex-grover/prettier-config",
