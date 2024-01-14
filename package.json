@@ -28,6 +28,7 @@
     "@vercel/analytics": "^1.1.1",
     "connectkit": "^1.5.3",
     "dayjs": "^1.11.10",
+    "farcaster-channels#61bcbe07a1b12ba91103cff9a15735bb76b03021": "github:neynarxyz/farcaster-channels#61bcbe07a1b12ba91103cff9a15735bb76b03021",
     "geist": "^1.0.0",
     "iron-session": "^6.3.1",
     "kysely": "^0.26.3",

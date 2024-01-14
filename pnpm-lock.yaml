@@ -29,6 +29,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
+  farcaster-channels#61bcbe07a1b12ba91103cff9a15735bb76b03021:
+    specifier: github:neynarxyz/farcaster-channels#61bcbe07a1b12ba91103cff9a15735bb76b03021
+    version: github.com/neynarxyz/farcaster-channels/61bcbe07a1b12ba91103cff9a15735bb76b03021
   geist:
     specifier: ^1.0.0
     version: 1.0.0
@@ -12921,4 +12924,13 @@ packages:
       '@types/react': 18.2.33
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  github.com/neynarxyz/farcaster-channels/61bcbe07a1b12ba91103cff9a15735bb76b03021:
+    resolution:
+      {
+        tarball: https://codeload.github.com/neynarxyz/farcaster-channels/tar.gz/61bcbe07a1b12ba91103cff9a15735bb76b03021,
+      }
+    name: farcaster-channels#61bcbe07a1b12ba91103cff9a15735bb76b03021
+    version: 0.0.0
     dev: false
