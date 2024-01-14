@@ -40,8 +40,12 @@ type CastProps = {
 }
 
 export default function Cast({ cast }: CastProps) {
-  const imageEmbeds = useMemo(
-    () => cast.embeds.filter((embed) => embed.url.includes('i.imgur.com')),
+  const imageEmbedUrls = useMemo(
+    () =>
+      cast.embeds
+        .filter((embed) => embed.url?.includes('i.imgur.com'))
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        .map((embed) => embed.url!),
     [cast.embeds],
   )
 
@@ -73,9 +77,9 @@ export default function Cast({ cast }: CastProps) {
             &bull; {dayjs(cast.timestamp).fromNow(true)}
           </span>
           <div className={styles.text}>{cast.text}</div>
-          {imageEmbeds.length > 0 && (
+          {imageEmbedUrls.length > 0 && (
             <div className={styles.embeds}>
-              {imageEmbeds.map(({ url }) => (
+              {imageEmbedUrls.map((url) => (
                 <div key={url} className={styles.embed}>
                   <Image
                     src={url}
