@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useCallback } from 'react'
 import { useNav } from '@/components/nav'
 import Noggles from '@/components/noggles'
-import ConnectButton from './connect-button'
+import HeaderMenu from './header-menu'
 import styles from './header.module.css'
 
 export default function Header() {
@@ -22,7 +22,7 @@ export default function Header() {
         <h1 className={styles.brand}>nouns.zone</h1>
       </Link>
       <div className={styles.button}>
-        <ConnectButton />
+        <HeaderMenu />
       </div>
       <button onClick={handleMenuClicked} className={styles.menu}>
         <MenuIcon />

@@ -5,13 +5,23 @@ import { SWRConfig } from 'swr'
 
 async function fetcher<Data>(
   input: RequestInfo | URL,
-  init?: RequestInit | undefined,
+  init?: RequestInit,
 ): Promise<Data> {
   const res = await fetch(input, init)
 
   if (!res.ok) throw new Error(await res.text())
 
   return (await res.json()) as Data
+}
+
+export function createMutationFetcher<Data, Extra = unknown>(
+  init?: RequestInit,
+) {
+  return (input: RequestInfo | URL, { arg }: { arg: Extra }) =>
+    fetcher<Data>(input, {
+      ...init,
+      body: JSON.stringify(arg),
+    })
 }
 
 export default function SWRProvider({ children }: PropsWithChildren) {

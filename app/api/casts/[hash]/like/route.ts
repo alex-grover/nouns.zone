@@ -1,10 +1,12 @@
 import { ReactionType } from '@neynar/nodejs-sdk'
-import { NextRequest, NextResponse } from 'next/server'
+import { getIronSession } from 'iron-session'
+import { cookies } from 'next/headers'
 import { z } from 'zod'
+import { type SessionData } from '@/lib/auth'
+import { sessionOptions } from '@/lib/auth/server'
 import db from '@/lib/db'
 import neynarClient from '@/lib/neynar/server'
-import Session from '@/lib/session'
-import hash from '@/lib/zod/hash'
+import hexString from '@/lib/zod/hex-string'
 
 type Props = {
   params: {
@@ -13,22 +15,23 @@ type Props = {
 }
 
 const paramsSchema = z.object({
-  hash,
+  hash: hexString,
 })
 
-export async function POST(request: NextRequest, { params }: Props) {
-  const { address } = await Session.fromCookies(request.cookies)
-  if (!address) return new Response('Unauthorized', { status: 401 })
+export async function POST(_: Request, { params }: Props) {
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  if (!session.id) return new Response('Unauthorized', { status: 401 })
+
   const user = await db
     .selectFrom('users')
     .selectAll()
-    .where('address', '=', address)
+    .where('fid', '=', session.id)
     .executeTakeFirst()
   if (!user) return new Response('Unauthorized', { status: 401 })
 
   const parseResult = paramsSchema.safeParse(params)
   if (!parseResult.success)
-    return NextResponse.json(parseResult.error.format(), { status: 400 })
+    return Response.json(parseResult.error.format(), { status: 400 })
 
   await neynarClient.publishReactionToCast(
     user.signer_uuid,
@@ -39,19 +42,20 @@ export async function POST(request: NextRequest, { params }: Props) {
   return new Response(null, { status: 201 })
 }
 
-export async function DELETE(request: NextRequest, { params }: Props) {
-  const { address } = await Session.fromCookies(request.cookies)
-  if (!address) return new Response('Unauthorized', { status: 401 })
+export async function DELETE(_: Request, { params }: Props) {
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  if (!session.id) return new Response('Unauthorized', { status: 401 })
+
   const user = await db
     .selectFrom('users')
     .selectAll()
-    .where('address', '=', address)
+    .where('fid', '=', session.id)
     .executeTakeFirst()
   if (!user) return new Response('Unauthorized', { status: 401 })
 
   const parseResult = paramsSchema.safeParse(params)
   if (!parseResult.success)
-    return NextResponse.json(parseResult.error.format(), { status: 400 })
+    return Response.json(parseResult.error.format(), { status: 400 })
 
   await neynarClient.deleteReactionFromCast(
     user.signer_uuid,

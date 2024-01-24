@@ -1,5 +1,4 @@
 import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v2'
-import { useModal, useSIWE } from 'connectkit'
 import { HeartIcon } from 'lucide-react'
 import {
   HTMLAttributes,
@@ -9,7 +8,7 @@ import {
   useState,
 } from 'react'
 import { toast } from 'sonner'
-import { useAccount } from 'wagmi'
+import useSession from '@/lib/auth/client'
 import { useSigner } from '@/lib/neynar/client'
 import styles from './like-button.module.css'
 
@@ -18,10 +17,7 @@ type LikeButtonProps = HTMLAttributes<HTMLSpanElement> & {
 }
 
 export default function LikeButton({ cast, ...props }: LikeButtonProps) {
-  const { address } = useAccount()
-  const { setOpen, openSIWE } = useModal()
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { isSignedIn } = useSIWE()
+  const { session } = useSession()
   const { signer, isLoading } = useSigner()
 
   const hasNoggles = useMemo(() => cast.text.includes('⌐◨-◨'), [cast])
@@ -39,9 +35,13 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
   }, [isLoading, signerLoaded, signer, cast.reactions.likes])
 
   const handleLike = useCallback(() => {
+    if (!session?.id) {
+      toast('TODO: show login QR code')
+      return
+    }
+
     if (signer?.status !== 'approved') {
-      if (!address) setOpen(true)
-      else if (!isSignedIn) openSIWE()
+      toast('TODO: show signer QR code')
       return
     }
 
@@ -61,7 +61,7 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
     }
 
     void execute()
-  }, [address, cast.hash, isSignedIn, openSIWE, setOpen, signer?.status])
+  }, [session?.id, signer?.status, cast.hash])
 
   const handleUnlike = useCallback(() => {
     async function execute() {

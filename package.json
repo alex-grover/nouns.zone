@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@alex-grover/styles": "^0.0.1",
+    "@farcaster/auth-client": "^0.0.22",
+    "@farcaster/auth-kit": "^0.0.39",
     "@farcaster/core": "^0.13.4",
     "@neynar/nodejs-sdk": "^1.7.0",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -29,7 +31,7 @@
     "connectkit": "^1.5.3",
     "dayjs": "^1.11.10",
     "geist": "^1.0.0",
-    "iron-session": "^6.3.1",
+    "iron-session": "^8.0.1",
     "kysely": "^0.26.3",
     "lucide-react": "^0.290.0",
     "next": "14.1.0",

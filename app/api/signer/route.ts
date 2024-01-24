@@ -1,23 +1,26 @@
 import { ViemLocalEip712Signer } from '@farcaster/core'
-import { Signer } from '@neynar/nodejs-sdk/build/neynar-api/v2'
-import { NextRequest, NextResponse } from 'next/server'
+import { type Signer } from '@neynar/nodejs-sdk/build/neynar-api/v2'
+import { getIronSession } from 'iron-session'
+import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 import { fromHex, isHex, toHex } from 'viem'
 import { mnemonicToAccount } from 'viem/accounts'
+import type { SessionData } from '@/lib/auth'
+import { sessionOptions } from '@/lib/auth/server'
 import db from '@/lib/db'
 import env from '@/lib/env'
 import neynarClient from '@/lib/neynar/server'
-import Session from '@/lib/session'
 
 export type SignerResponse = Signer
 
-export async function GET(request: NextRequest) {
-  const { address } = await Session.fromCookies(request.cookies)
-  if (!address) return new Response('Unauthorized', { status: 401 })
+export async function GET() {
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  if (!session.id) return new Response('Unauthorized', { status: 401 })
 
   const user = await db
     .selectFrom('users')
     .selectAll()
-    .where('address', '=', address)
+    .where('fid', '=', session.id)
     .executeTakeFirst()
   if (!user) return new Response('Not found', { status: 404 })
 
@@ -26,14 +29,14 @@ export async function GET(request: NextRequest) {
   return NextResponse.json<SignerResponse>(signer)
 }
 
-export async function PUT(request: NextRequest) {
-  const { address } = await Session.fromCookies(request.cookies)
-  if (!address) return new Response('Unauthorized', { status: 401 })
+export async function PUT() {
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  if (!session.id) return new Response('Unauthorized', { status: 401 })
 
   const user = await db
     .selectFrom('users')
     .selectAll()
-    .where('address', '=', address)
+    .where('fid', '=', session.id)
     .executeTakeFirst()
 
   if (user) {
@@ -47,7 +50,7 @@ export async function PUT(request: NextRequest) {
 
   await db
     .insertInto('users')
-    .values({ address, signer_uuid: generatedSigner.signer_uuid })
+    .values({ fid: session.id, signer_uuid: generatedSigner.signer_uuid })
     .execute()
 
   const deadline = Math.floor(Date.now() / 1000) + 86400

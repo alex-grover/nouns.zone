@@ -1,9 +1,10 @@
+import { getIronSession } from 'iron-session'
 import { ExternalLinkIcon } from 'lucide-react'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
-import db from '@/lib/db'
+import { type SessionData } from '@/lib/auth'
+import { sessionOptions } from '@/lib/auth/server'
 import neynarClient from '@/lib/neynar/server'
-import Session from '@/lib/session'
 import styles from './page.module.css'
 
 type UserPageProps = {
@@ -13,19 +14,10 @@ type UserPageProps = {
 }
 
 export default async function UserPage({ params }: UserPageProps) {
-  const { address } = await Session.fromCookies(cookies())
-  const viewer = address
-    ? await db
-        .selectFrom('users')
-        .selectAll()
-        .where('address', '=', address)
-        .executeTakeFirst()
-    : null
-  const signer = viewer && (await neynarClient.lookupSigner(viewer.signer_uuid))
-  const viewerFid = signer?.status === 'approved' ? signer.fid : undefined
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions)
   const {
     result: { user },
-  } = await neynarClient.lookupUserByUsername(params.username, viewerFid)
+  } = await neynarClient.lookupUserByUsername(params.username, session.id)
 
   return (
     <div className={styles.container}>

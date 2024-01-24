@@ -11,6 +11,7 @@ const env = createEnv({
     FARCASTER_MNEMONIC: z.string().min(1),
     NEYNAR_API_KEY: z.string().min(1),
     SESSION_SECRET: z.string().min(1),
+    VERCEL_ENV: z.enum(['production', 'preview', 'development']),
   },
   experimental__runtimeEnv: {
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID:

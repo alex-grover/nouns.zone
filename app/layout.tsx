@@ -6,11 +6,12 @@ import { PropsWithChildren } from 'react'
 import Header from '@/components/header'
 import Nav, { NavProvider } from '@/components/nav'
 import QRCodeDialog from '@/components/qr-code-dialog'
-import ConnectKitConfig from '@/lib/connectkit'
+import FarcasterConfig from '@/lib/farcaster'
 import NeynarProvider from '@/lib/neynar/client'
 import SWRProvider from '@/lib/swr'
 import ThemeProvider from '@/lib/theme'
 import ToastConfig from '@/lib/toast'
+import '@farcaster/auth-kit/styles.css'
 import '@/styles/global.css'
 import '@/styles/theme.css'
 import styles from './layout.module.css'
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ThemeProvider>
           <SWRProvider>
             <NeynarProvider>
-              <ConnectKitConfig>
+              <FarcasterConfig>
                 <NavProvider>
                   <Header />
                   <Nav />
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   <QRCodeDialog />
                   <ToastConfig />
                 </NavProvider>
-              </ConnectKitConfig>
+              </FarcasterConfig>
             </NeynarProvider>
           </SWRProvider>
         </ThemeProvider>
