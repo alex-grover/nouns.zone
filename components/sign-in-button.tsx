@@ -1,6 +1,6 @@
 import {
   SignInButton as FarcasterSignInButton,
-  StatusAPIResponse,
+  type StatusAPIResponse,
 } from '@farcaster/auth-kit'
 import { useCallback } from 'react'
 import { toast } from 'sonner'

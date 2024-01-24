@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite'
-import { CastsResponse } from '@/app/api/casts/route'
+import { type CastsResponse } from '@/app/api/casts/route'
 import LoadingSpinner from '@/components/loading-spinner'
 import Cast from './cast'
 import styles from './page.module.css'

@@ -1,7 +1,7 @@
 'use client'
 
 import { AuthKitProvider } from '@farcaster/auth-kit'
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 
 const DOMAIN = 'nouns.zone'
 

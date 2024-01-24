@@ -1,5 +1,5 @@
 import { FeedType, FilterType } from '@neynar/nodejs-sdk'
-import { FeedResponse } from '@neynar/nodejs-sdk/build/neynar-api/v2'
+import { type FeedResponse } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { NextResponse } from 'next/server'
 import neynarClient from '@/lib/neynar/server'
 

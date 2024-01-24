@@ -1,7 +1,7 @@
 import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { HeartIcon } from 'lucide-react'
 import {
-  HTMLAttributes,
+  type HTMLAttributes,
   useCallback,
   useEffect,
   useMemo,

@@ -1,6 +1,6 @@
 import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { RepeatIcon } from 'lucide-react'
-import { HTMLAttributes, useCallback, useEffect, useState } from 'react'
+import { type HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import useSession from '@/lib/auth/client'
 import { useSigner } from '@/lib/neynar/client'

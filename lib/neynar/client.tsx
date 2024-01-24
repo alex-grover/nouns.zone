@@ -2,13 +2,13 @@
 
 import {
   createContext,
-  PropsWithChildren,
+  type PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react'
-import { SignerResponse } from '@/app/api/signer/route'
+import { type SignerResponse } from '@/app/api/signer/route'
 
 export type NeynarContextType = {
   signer: SignerResponse | null

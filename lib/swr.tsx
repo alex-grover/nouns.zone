@@ -1,6 +1,6 @@
 'use client'
 
-import { PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
 import { SWRConfig } from 'swr'
 
 async function fetcher<Data>(

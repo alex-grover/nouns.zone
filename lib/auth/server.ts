@@ -1,5 +1,5 @@
 import { createAppClient, viemConnector } from '@farcaster/auth-client'
-import { SessionOptions } from 'iron-session'
+import { type SessionOptions } from 'iron-session'
 import env from '@/lib/env'
 
 export const sessionOptions: SessionOptions = {
