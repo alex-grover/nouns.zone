@@ -40,11 +40,14 @@ export default function RecastButton({ cast, ...props }: RecastButtonProps) {
     }
 
     async function execute() {
-      try {
-        setRecasted(true)
-        setRecastCount((curr) => curr + 1)
-        await fetch(`/api/casts/${cast.hash}/recast`, { method: 'POST' })
-      } catch (e) {
+      setRecasted(true)
+      setRecastCount((curr) => curr + 1)
+
+      const response = await fetch(`/api/casts/${cast.hash}/recast`, {
+        method: 'POST',
+      })
+
+      if (!response.ok) {
         setRecasted(false)
         setRecastCount((curr) => curr - 1)
         toast.error('Failed to recast cast')
@@ -56,11 +59,14 @@ export default function RecastButton({ cast, ...props }: RecastButtonProps) {
 
   const handleUnrecast = useCallback(() => {
     async function execute() {
-      try {
-        setRecasted(false)
-        setRecastCount((curr) => curr - 1)
-        await fetch(`/api/casts/${cast.hash}/recast`, { method: 'DELETE' })
-      } catch (e) {
+      setRecasted(false)
+      setRecastCount((curr) => curr - 1)
+
+      const response = await fetch(`/api/casts/${cast.hash}/recast`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
         setRecasted(true)
         setRecastCount((curr) => curr + 1)
         toast('Failed to unrecast cast')

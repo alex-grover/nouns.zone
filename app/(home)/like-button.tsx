@@ -46,11 +46,14 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
     }
 
     async function execute() {
-      try {
-        setLiked(true)
-        setLikeCount((curr) => curr + 1)
-        await fetch(`/api/casts/${cast.hash}/like`, { method: 'POST' })
-      } catch (e) {
+      setLiked(true)
+      setLikeCount((curr) => curr + 1)
+
+      const response = await fetch(`/api/casts/${cast.hash}/like`, {
+        method: 'POST',
+      })
+
+      if (!response.ok) {
         setLiked(false)
         setLikeCount((curr) => curr - 1)
         toast.error('Failed to like cast')
@@ -62,11 +65,14 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
 
   const handleUnlike = useCallback(() => {
     async function execute() {
-      try {
-        setLiked(false)
-        setLikeCount((curr) => curr - 1)
-        await fetch(`/api/casts/${cast.hash}/like`, { method: 'DELETE' })
-      } catch (e) {
+      setLiked(false)
+      setLikeCount((curr) => curr - 1)
+
+      const response = await fetch(`/api/casts/${cast.hash}/like`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
         setLiked(true)
         setLikeCount((curr) => curr + 1)
         toast('Failed to unlike cast')
