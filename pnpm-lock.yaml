@@ -8,6 +8,9 @@ dependencies:
   '@alex-grover/styles':
     specifier: ^0.0.1
     version: 0.0.1
+  '@farcaster/core':
+    specifier: ^0.13.4
+    version: 0.13.4(typescript@5.2.2)(zod@3.22.4)
   '@neynar/nodejs-sdk':
     specifier: ^1.7.0
     version: 1.7.0(typescript@5.2.2)(zod@3.22.4)
@@ -28,7 +31,7 @@ dependencies:
     version: 1.1.1
   connectkit:
     specifier: ^1.5.3
-    version: 1.5.3(@babel/core@7.23.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(viem@1.18.0)(wagmi@1.4.5)
+    version: 1.5.3(@babel/core@7.23.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(viem@1.21.4)(wagmi@1.4.5)
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
@@ -72,11 +75,11 @@ dependencies:
     specifier: ^2.2.4
     version: 2.2.4(react@18.2.0)
   viem:
-    specifier: ^1.18.0
-    version: 1.18.0(typescript@5.2.2)(zod@3.22.4)
+    specifier: ^1.21.4
+    version: 1.21.4(typescript@5.2.2)(zod@3.22.4)
   wagmi:
     specifier: ^1.4.5
-    version: 1.4.5(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4)
+    version: 1.4.5(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4)
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -192,13 +195,6 @@ packages:
       }
     dev: false
 
-  /@adraffy/ens-normalize@1.9.4:
-    resolution:
-      {
-        integrity: sha512-UK0bHA7hh9cR39V+4gl2/NnBBjoXIxkuWAPCaY4X7fbH4L/azIi7ilWOCjMUYfpJgraLUAqkRi2BqrjME8Rynw==,
-      }
-    dev: false
-
   /@alex-grover/eslint-config@0.0.5(@typescript-eslint/eslint-plugin@6.9.0)(@typescript-eslint/parser@6.9.0)(eslint-config-prettier@9.0.0)(eslint-import-resolver-typescript@3.6.1)(eslint-plugin-css-modules@2.12.0)(eslint-plugin-import@2.29.0)(eslint@8.52.0):
     resolution:
       {
@@ -265,7 +261,7 @@ packages:
     engines: { node: '>=6.0.0' }
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
-      '@jridgewell/trace-mapping': 0.3.21
+      '@jridgewell/trace-mapping': 0.3.22
     dev: false
 
   /@babel/code-frame@7.22.13:
@@ -345,7 +341,7 @@ packages:
     dependencies:
       '@babel/types': 7.23.6
       '@jridgewell/gen-mapping': 0.3.3
-      '@jridgewell/trace-mapping': 0.3.21
+      '@jridgewell/trace-mapping': 0.3.22
       jsesc: 2.5.2
     dev: false
 
@@ -1632,6 +1628,26 @@ packages:
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
     dev: true
 
+  /@farcaster/core@0.13.4(typescript@5.2.2)(zod@3.22.4):
+    resolution:
+      {
+        integrity: sha512-cvQLzD+r4/1kI763jox0ZtU5BkmYQjOvvabcYVvJAfIJUsQfwpcVJOEliLuO94a2pyZSp7/CLQN0In0RUIVKlQ==,
+      }
+    dependencies:
+      '@noble/curves': 1.2.0
+      '@noble/hashes': 1.3.2
+      ffi-napi: 4.0.3
+      neverthrow: 6.1.0
+      ref-napi: 3.0.3
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - typescript
+      - utf-8-validate
+      - zod
+    dev: false
+
   /@floating-ui/core@1.5.0:
     resolution:
       {
@@ -1759,10 +1775,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: false
 
-  /@jridgewell/trace-mapping@0.3.21:
+  /@jridgewell/trace-mapping@0.3.22:
     resolution:
       {
-        integrity: sha512-SRfKmRe1KvYnxjEMtxEr+J4HIeMX5YBg/qhRHpxEIGjhX1rshcHlnFUE9K0GazhVKWM7B+nARSkV8LuvJdJ5/g==,
+        integrity: sha512-Wf963MzWtA2sjrNt+g18IAln9lKnlRp+K2eH4jjIoF1wYeq3aMREpG09xhlhdzS0EjwU7qmUJYangWa+151vZw==,
       }
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
@@ -2980,7 +2996,7 @@ packages:
       }
     dependencies:
       '@safe-global/safe-gateway-typescript-sdk': 3.12.0
-      viem: 1.18.0(typescript@5.2.2)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -2995,7 +3011,7 @@ packages:
       }
     dependencies:
       '@safe-global/safe-gateway-typescript-sdk': 3.12.0
-      viem: 1.18.0(typescript@5.2.2)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -4126,7 +4142,7 @@ packages:
       ts-morph: 12.0.0
     dev: true
 
-  /@wagmi/connectors@3.1.3(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4):
+  /@wagmi/connectors@3.1.3(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4):
     resolution:
       {
         integrity: sha512-UgwsQKQDFObJVJMf9pDfFoXTv710o4zrTHyhIWKBTMMkLpCMsMxN5+ZaDhBYt/BgoRinfRYQo8uwuwLhxE6Log==,
@@ -4149,7 +4165,7 @@ packages:
       abitype: 0.8.7(typescript@5.2.2)(zod@3.22.4)
       eventemitter3: 4.0.7
       typescript: 5.2.2
-      viem: 1.18.0(typescript@5.2.2)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
     transitivePeerDependencies:
       - '@react-native-async-storage/async-storage'
       - '@types/react'
@@ -4162,7 +4178,7 @@ packages:
       - zod
     dev: false
 
-  /@wagmi/core@1.4.5(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4):
+  /@wagmi/core@1.4.5(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4):
     resolution:
       {
         integrity: sha512-N9luRb1Uk4tBN9kaYcQSWKE9AsRt/rvZaFt5IZech4JPzNN2sQlfhKd9GEjOXYRDqEPHdDvos7qyBKiDNTz4GA==,
@@ -4174,11 +4190,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@wagmi/connectors': 3.1.3(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4)
+      '@wagmi/connectors': 3.1.3(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4)
       abitype: 0.8.7(typescript@5.2.2)(zod@3.22.4)
       eventemitter3: 4.0.7
       typescript: 5.2.2
-      viem: 1.18.0(typescript@5.2.2)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
       zustand: 4.4.4(@types/react@18.2.33)(react@18.2.0)
     transitivePeerDependencies:
       - '@react-native-async-storage/async-storage'
@@ -5372,7 +5388,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001579
-      electron-to-chromium: 1.4.638
+      electron-to-chromium: 1.4.643
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.2)
     dev: false
@@ -5779,7 +5795,7 @@ packages:
       yargs: 16.2.0
     dev: false
 
-  /connectkit@1.5.3(@babel/core@7.23.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(viem@1.18.0)(wagmi@1.4.5):
+  /connectkit@1.5.3(@babel/core@7.23.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(viem@1.21.4)(wagmi@1.4.5):
     resolution:
       {
         integrity: sha512-vXneVOa+oit5Migoxca2QkgVBHaROItzb2kW13o7aUrcEcecYIGZjsizsVM2YvIdKihyWs+zJFrlED4g8zAMew==,
@@ -5801,8 +5817,8 @@ packages:
       react-use-measure: 2.1.1(react-dom@18.2.0)(react@18.2.0)
       resize-observer-polyfill: 1.5.1
       styled-components: 5.3.11(@babel/core@7.23.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      viem: 1.18.0(typescript@5.2.2)(zod@3.22.4)
-      wagmi: 1.4.5(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
+      wagmi: 1.4.5(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4)
     transitivePeerDependencies:
       - '@babel/core'
       - react-is
@@ -6064,7 +6080,6 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.3
-    dev: true
 
   /debug@4.1.1:
     resolution:
@@ -6328,10 +6343,10 @@ packages:
       }
     dev: true
 
-  /electron-to-chromium@1.4.638:
+  /electron-to-chromium@1.4.643:
     resolution:
       {
-        integrity: sha512-gpmbAG2LbfPKcDaL5m9IKutKjUx4ZRkvGNkgL/8nKqxkXsBVYykVULboWlqCrHsh3razucgDJDuKoWJmGPdItA==,
+        integrity: sha512-QHscvvS7gt155PtoRC0dR2ilhL8E9LHhfTQEq1uD5AL0524rBLAwpAREFH06f87/e45B9XkR6Ki5dbhbCsVEIg==,
       }
     dev: false
 
@@ -7468,6 +7483,24 @@ packages:
       pend: 1.2.0
     dev: true
 
+  /ffi-napi@4.0.3:
+    resolution:
+      {
+        integrity: sha512-PMdLCIvDY9mS32RxZ0XGb95sonPRal8aqRhLbeEtWKZTe2A87qRFG9HjOhvG8EX2UmQw5XNRMIOT+1MYlWmdeg==,
+      }
+    engines: { node: '>=10' }
+    requiresBuild: true
+    dependencies:
+      debug: 4.3.4(supports-color@5.5.0)
+      get-uv-event-loop-napi-h: 1.0.6
+      node-addon-api: 3.2.1
+      node-gyp-build: 4.6.1
+      ref-napi: 3.0.3
+      ref-struct-di: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /figures@3.2.0:
     resolution:
       {
@@ -7865,6 +7898,13 @@ packages:
       get-intrinsic: 1.2.2
     dev: true
 
+  /get-symbol-from-current-process-h@1.0.2:
+    resolution:
+      {
+        integrity: sha512-syloC6fsCt62ELLrr1VKBM1ggOpMdetX9hTrdW77UQdcApPHLmf7CI7OKcN1c9kYuNxKcDe4iJ4FY9sX3aw2xw==,
+      }
+    dev: false
+
   /get-tsconfig@4.7.2:
     resolution:
       {
@@ -7873,6 +7913,15 @@ packages:
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
+
+  /get-uv-event-loop-napi-h@1.0.6:
+    resolution:
+      {
+        integrity: sha512-t5c9VNR84nRoF+eLiz6wFrEp1SE2Acg0wS+Ysa2zF0eROes+LzOfuTaVHxGy8AbS8rq7FHEJzjnCZo1BupwdJg==,
+      }
+    dependencies:
+      get-symbol-from-current-process-h: 1.0.2
+    dev: false
 
   /git-diff@2.0.6:
     resolution:
@@ -9575,6 +9624,13 @@ packages:
       }
     dev: true
 
+  /neverthrow@6.1.0:
+    resolution:
+      {
+        integrity: sha512-xNbNjp/6M5vUV+mststgneJN9eJeJCDSYSBTaf3vxgvcKooP+8L0ATFpM8DGfmH7UWKJeoa24Qi33tBP9Ya3zA==,
+      }
+    dev: false
+
   /next-themes@1.0.0-beta.0(next@14.1.0)(react-dom@18.2.0)(react@18.2.0):
     resolution:
       {
@@ -9636,6 +9692,13 @@ packages:
     resolution:
       {
         integrity: sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==,
+      }
+    dev: false
+
+  /node-addon-api@3.2.1:
+    resolution:
+      {
+        integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==,
       }
     dev: false
 
@@ -10808,6 +10871,19 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
+  /postcss-selector-parser@6.0.15:
+    resolution:
+      {
+        integrity: sha512-rEYkQOMUCEMhsKbK66tbEU9QVIxbhN18YiniAwA7XQYTVBqrBy+P2p5JcdqsHgKM2zWylp8d7J6eszocfds5Sw==,
+      }
+    engines: { node: '>=4' }
+    requiresBuild: true
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
+    dev: true
+    optional: true
+
   /postcss-sorting@8.0.2(postcss@8.4.33):
     resolution:
       {
@@ -11306,6 +11382,33 @@ packages:
     dependencies:
       resolve: 1.22.8
     dev: true
+
+  /ref-napi@3.0.3:
+    resolution:
+      {
+        integrity: sha512-LiMq/XDGcgodTYOMppikEtJelWsKQERbLQsYm0IOOnzhwE9xYZC7x8txNnFC9wJNOkPferQI4vD4ZkC0mDyrOA==,
+      }
+    engines: { node: '>= 10.0' }
+    requiresBuild: true
+    dependencies:
+      debug: 4.3.4(supports-color@5.5.0)
+      get-symbol-from-current-process-h: 1.0.2
+      node-addon-api: 3.2.1
+      node-gyp-build: 4.6.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /ref-struct-di@1.1.1:
+    resolution:
+      {
+        integrity: sha512-2Xyn/0Qgz89VT+++WP0sTosdm9oeowLP23wRJYhG4BFdMUrLj3jhwHZNEytYNYgtPKLNTP3KJX4HEgBvM1/Y2g==,
+      }
+    dependencies:
+      debug: 3.2.7
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /reflect-metadata@0.1.13:
     resolution:
@@ -12128,7 +12231,7 @@ packages:
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
     optionalDependencies:
-      stylelint-scss: 6.0.0(stylelint@16.1.0)
+      stylelint-scss: 6.1.0(stylelint@16.1.0)
     dev: true
 
   /stylelint-config-recess-order@4.4.0(stylelint@16.1.0):
@@ -12181,10 +12284,10 @@ packages:
       stylelint: 16.1.0(typescript@5.2.2)
     dev: true
 
-  /stylelint-scss@6.0.0(stylelint@16.1.0):
+  /stylelint-scss@6.1.0(stylelint@16.1.0):
     resolution:
       {
-        integrity: sha512-N1xV/Ef5PNRQQt9E45unzGvBUN1KZxCI8B4FgN/pMfmyRYbZGVN4y9qWlvOMdScU17c8VVCnjIHTVn38Bb6qSA==,
+        integrity: sha512-kCfK8TQzthGwb4vaZniZgxRsVbCM4ZckmT1b/H5m4FU3I8Dz0id9llKsy1NMp3XXqC8+OPD4rVKtUbSxXlJb5g==,
       }
     engines: { node: '>=18.12.0' }
     requiresBuild: true
@@ -12194,7 +12297,7 @@ packages:
       known-css-properties: 0.29.0
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.1
-      postcss-selector-parser: 6.0.13
+      postcss-selector-parser: 6.0.15
       postcss-value-parser: 4.2.0
       stylelint: 16.1.0(typescript@5.2.2)
     dev: true
@@ -12972,32 +13075,6 @@ packages:
       - supports-color
     dev: true
 
-  /viem@1.18.0(typescript@5.2.2)(zod@3.22.4):
-    resolution:
-      {
-        integrity: sha512-NeKi5RFj7fHdsnk5pojivHFLkTyBWyehxeSE/gSPTDJKCWnR9i+Ra0W++VwN5ghciEG55O8b4RdpYhzGmhnr7A==,
-      }
-    peerDependencies:
-      typescript: '>=5.0.4'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@adraffy/ens-normalize': 1.9.4
-      '@noble/curves': 1.2.0
-      '@noble/hashes': 1.3.2
-      '@scure/bip32': 1.3.2
-      '@scure/bip39': 1.2.1
-      abitype: 0.9.8(typescript@5.2.2)(zod@3.22.4)
-      isows: 1.0.3(ws@8.13.0)
-      typescript: 5.2.2
-      ws: 8.13.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
   /viem@1.21.4(typescript@5.2.2)(zod@3.22.4):
     resolution:
       {
@@ -13024,7 +13101,7 @@ packages:
       - zod
     dev: false
 
-  /wagmi@1.4.5(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4):
+  /wagmi@1.4.5(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4):
     resolution:
       {
         integrity: sha512-Ph62E6cO5n2Z8Z5LTyZrkaNprxTsbC4w0qZJT4OJdXrEELziI8z/b4FO6amVFXdu2rDp/wpvF56e4mhKC8/Kdw==,
@@ -13040,12 +13117,12 @@ packages:
       '@tanstack/query-sync-storage-persister': 4.36.1
       '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query-persist-client': 4.36.1(@tanstack/react-query@4.36.1)
-      '@wagmi/core': 1.4.5(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.18.0)(zod@3.22.4)
+      '@wagmi/core': 1.4.5(@types/react@18.2.33)(react@18.2.0)(typescript@5.2.2)(viem@1.21.4)(zod@3.22.4)
       abitype: 0.8.7(typescript@5.2.2)(zod@3.22.4)
       react: 18.2.0
       typescript: 5.2.2
       use-sync-external-store: 1.2.0(react@18.2.0)
-      viem: 1.18.0(typescript@5.2.2)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
     transitivePeerDependencies:
       - '@react-native-async-storage/async-storage'
       - '@types/react'

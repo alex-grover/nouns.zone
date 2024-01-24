@@ -1,8 +1,10 @@
+import { ViemLocalEip712Signer } from '@farcaster/core'
 import { NextRequest, NextResponse } from 'next/server'
-import { Hash } from 'viem'
+import { fromHex, isHex, toHex } from 'viem'
+import { mnemonicToAccount } from 'viem/accounts'
 import db from '@/lib/db'
 import env from '@/lib/env'
-import neynarClient, { generateSignature } from '@/lib/neynar/server'
+import neynarClient from '@/lib/neynar/server'
 import Session from '@/lib/session'
 
 export async function GET(request: NextRequest) {
@@ -36,20 +38,33 @@ export async function PUT(request: NextRequest) {
   }
 
   const generatedSigner = await neynarClient.createSigner()
+  if (!isHex(generatedSigner.public_key))
+    return new Response('Invalid signer public key', { status: 500 })
+
   await db
     .insertInto('users')
     .values({ address, signer_uuid: generatedSigner.signer_uuid })
     .execute()
 
-  const { deadline, signature } = await generateSignature(
-    generatedSigner.public_key as Hash,
+  const deadline = Math.floor(Date.now() / 1000) + 86400
+  const viemSigner = new ViemLocalEip712Signer(
+    mnemonicToAccount(env.FARCASTER_MNEMONIC),
   )
+
+  const result = await viemSigner.signKeyRequest({
+    requestFid: BigInt(env.FARCASTER_ID),
+    key: fromHex(generatedSigner.public_key, 'bytes'),
+    deadline: BigInt(Math.floor(Date.now() / 1000) + 86400),
+  })
+
+  if (!result.isOk())
+    return new Response('Error signing key request', { status: 500 })
 
   const signer = await neynarClient.registerSignedKey(
     generatedSigner.signer_uuid,
     env.FARCASTER_ID,
     deadline,
-    signature,
+    toHex(result.value),
   )
 
   return NextResponse.json(signer, { status: 201 })
