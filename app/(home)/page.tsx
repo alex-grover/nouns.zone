@@ -1,14 +1,14 @@
 'use client'
 
-import { type FeedResponse } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { useEffect, useState } from 'react'
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite'
+import { CastsResponse } from '@/app/api/casts/route'
 import LoadingSpinner from '@/components/loading-spinner'
 import Cast from './cast'
 import styles from './page.module.css'
 
 export default function HomePage() {
-  const { data, isLoading, setSize } = useSWRInfinite<FeedResponse, string>(
+  const { data, isLoading, setSize } = useSWRInfinite<CastsResponse, string>(
     getKey,
   )
 
@@ -53,7 +53,7 @@ export default function HomePage() {
 
 const API_URL = '/api/casts'
 
-const getKey: SWRInfiniteKeyLoader<FeedResponse> = (_, previousPageData) => {
+const getKey: SWRInfiniteKeyLoader<CastsResponse> = (_, previousPageData) => {
   if (!previousPageData) return API_URL
   if (!previousPageData.next.cursor) return null
 

@@ -1,4 +1,5 @@
 import { ViemLocalEip712Signer } from '@farcaster/core'
+import { Signer } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { NextRequest, NextResponse } from 'next/server'
 import { fromHex, isHex, toHex } from 'viem'
 import { mnemonicToAccount } from 'viem/accounts'
@@ -6,6 +7,8 @@ import db from '@/lib/db'
 import env from '@/lib/env'
 import neynarClient from '@/lib/neynar/server'
 import Session from '@/lib/session'
+
+export type SignerResponse = Signer
 
 export async function GET(request: NextRequest) {
   const { address } = await Session.fromCookies(request.cookies)
@@ -20,7 +23,7 @@ export async function GET(request: NextRequest) {
 
   const signer = await neynarClient.lookupSigner(user.signer_uuid)
 
-  return NextResponse.json(signer)
+  return NextResponse.json<SignerResponse>(signer)
 }
 
 export async function PUT(request: NextRequest) {
@@ -32,9 +35,10 @@ export async function PUT(request: NextRequest) {
     .selectAll()
     .where('address', '=', address)
     .executeTakeFirst()
+
   if (user) {
     const signer = await neynarClient.lookupSigner(user.signer_uuid)
-    return NextResponse.json(signer, { status: 202 })
+    return NextResponse.json<SignerResponse>(signer, { status: 202 })
   }
 
   const generatedSigner = await neynarClient.createSigner()
@@ -67,5 +71,5 @@ export async function PUT(request: NextRequest) {
     toHex(result.value),
   )
 
-  return NextResponse.json(signer, { status: 201 })
+  return NextResponse.json<SignerResponse>(signer, { status: 201 })
 }

@@ -1,6 +1,5 @@
 'use client'
 
-import { type Signer } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import {
   createContext,
   PropsWithChildren,
@@ -9,9 +8,10 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { SignerResponse } from '@/app/api/signer/route'
 
 export type NeynarContextType = {
-  signer: Signer | null
+  signer: SignerResponse | null
   fetchSigner: () => void
   clearSigner: () => void
   isLoading: boolean
@@ -33,7 +33,7 @@ const NeynarContext = createContext<NeynarContextType>({
 
 export default function NeynarProvider({ children }: PropsWithChildren) {
   const [isLoading, setIsLoading] = useState(true)
-  const [signer, setSigner] = useState<Signer | null>(null)
+  const [signer, setSigner] = useState<SignerResponse | null>(null)
 
   const fetchSigner = useCallback(() => {
     async function execute() {
@@ -48,7 +48,7 @@ export default function NeynarProvider({ children }: PropsWithChildren) {
         return
       }
 
-      const newSigner = (await response.json()) as Signer
+      const newSigner = (await response.json()) as SignerResponse
       setSigner(newSigner)
       setIsLoading(false)
     }
@@ -73,7 +73,7 @@ export default function NeynarProvider({ children }: PropsWithChildren) {
       intervalId = setInterval(async () => {
         const response = await fetch('/api/signer')
 
-        const updatedSigner = (await response.json()) as Signer
+        const updatedSigner = (await response.json()) as SignerResponse
         if (updatedSigner.status !== 'approved') return
 
         setSigner(updatedSigner)
@@ -103,7 +103,7 @@ export default function NeynarProvider({ children }: PropsWithChildren) {
     setSigner(null)
 
     const response = await fetch('/api/signer', { method: 'PUT' })
-    const signer = (await response.json()) as Signer
+    const signer = (await response.json()) as SignerResponse
 
     setSigner(signer)
   }, [])
