@@ -16,6 +16,7 @@ import '@/styles/theme.css'
 import styles from './layout.module.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nouns.zone'),
   title: 'nouns.zone',
   description: 'All things Nouns on Farcaster',
   openGraph: {

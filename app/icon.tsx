@@ -70,9 +70,6 @@ export default function Icon() {
         </svg>
       </div>
     ),
-    {
-      width: 180,
-      height: 180,
-    },
+    size,
   )
 }

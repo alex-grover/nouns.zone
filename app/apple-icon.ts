@@ -1,2 +1,1 @@
-export { default } from './icon'
-export * from './icon'
+export { default, runtime, contentType, size } from './icon'
