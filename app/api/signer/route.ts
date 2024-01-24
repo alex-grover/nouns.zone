@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Hash } from 'viem'
 import db from '@/lib/db'
-import neynarClient from '@/lib/neynar/server'
+import env from '@/lib/env'
+import neynarClient, { generateSignature } from '@/lib/neynar/server'
 import Session from '@/lib/session'
 
 export async function GET(request: NextRequest) {
@@ -14,7 +16,8 @@ export async function GET(request: NextRequest) {
     .executeTakeFirst()
   if (!user) return new Response('Not found', { status: 404 })
 
-  const signer = await neynarClient.getSigner(user.signer_uuid)
+  const signer = await neynarClient.lookupSigner(user.signer_uuid)
+
   return NextResponse.json(signer)
 }
 
@@ -28,15 +31,26 @@ export async function PUT(request: NextRequest) {
     .where('address', '=', address)
     .executeTakeFirst()
   if (user) {
-    const signer = await neynarClient.getSigner(user.signer_uuid)
+    const signer = await neynarClient.lookupSigner(user.signer_uuid)
     return NextResponse.json(signer, { status: 202 })
   }
 
-  const signer = await neynarClient.createSigner()
+  const generatedSigner = await neynarClient.createSigner()
   await db
     .insertInto('users')
-    .values({ address, signer_uuid: signer.signer_uuid })
+    .values({ address, signer_uuid: generatedSigner.signer_uuid })
     .execute()
+
+  const { deadline, signature } = await generateSignature(
+    generatedSigner.public_key as Hash,
+  )
+
+  const signer = await neynarClient.registerSignedKey(
+    generatedSigner.signer_uuid,
+    env.FARCASTER_ID,
+    deadline,
+    signature,
+  )
 
   return NextResponse.json(signer, { status: 201 })
 }

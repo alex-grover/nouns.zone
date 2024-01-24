@@ -1,6 +1,6 @@
 'use client'
 
-import { type Signer } from 'neynar-next/server'
+import { type Signer } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import {
   createContext,
   PropsWithChildren,

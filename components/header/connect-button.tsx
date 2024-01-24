@@ -1,9 +1,9 @@
+import { type User } from '@neynar/nodejs-sdk/build/neynar-api/v1'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { ConnectKitButton, useModal, useSIWE } from 'connectkit'
 import { LogOutIcon, UserIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { User } from 'neynar-next/server'
 import { useCallback } from 'react'
 import useSWRImmutable from 'swr/immutable'
 import Button from '@/components/button'
@@ -16,7 +16,7 @@ export default function ConnectButton() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { signOut } = useSIWE()
 
-  const { data } = useSWRImmutable<User>(
+  const { data: user } = useSWRImmutable<User>(
     signer?.status === 'approved' ? `/api/users/${signer.fid}` : null,
   )
 
@@ -35,22 +35,22 @@ export default function ConnectButton() {
     void execute()
   }, [signOut, clearSigner])
 
-  if (signer?.status === 'approved' && data) {
+  if (signer?.status === 'approved' && user) {
     return (
       <DropdownMenu.Root>
         <DropdownMenu.Trigger className={styles.button}>
           <Image
-            src={data.pfp_url}
+            src={user.pfp.url}
             alt="Profile picture"
             height="24"
             width="24"
             className={styles.avatar}
           />
-          @{data.username}
+          @{user.username}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className={styles.menu}>
           <DropdownMenu.Item asChild>
-            <Link href={`/users/${data.username}`} className={styles.item}>
+            <Link href={`/users/${user.username}`} className={styles.item}>
               <UserIcon />
               <span>Profile</span>
             </Link>

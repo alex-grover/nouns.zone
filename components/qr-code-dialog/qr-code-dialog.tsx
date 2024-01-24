@@ -30,7 +30,8 @@ export default function QRCodeDialog() {
     [disconnect],
   )
 
-  if (signer?.status !== 'pending_approval') return null
+  if (signer?.status !== 'pending_approval' || !signer.signer_approval_url)
+    return null
 
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>

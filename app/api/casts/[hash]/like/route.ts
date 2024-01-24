@@ -1,3 +1,4 @@
+import { ReactionType } from '@neynar/nodejs-sdk'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import db from '@/lib/db'
@@ -29,7 +30,11 @@ export async function POST(request: NextRequest, { params }: Props) {
   if (!parseResult.success)
     return NextResponse.json(parseResult.error.format(), { status: 400 })
 
-  await neynarClient.likeCast(user.signer_uuid, parseResult.data.hash)
+  await neynarClient.publishReactionToCast(
+    user.signer_uuid,
+    ReactionType.Like,
+    parseResult.data.hash,
+  )
 
   return new Response(null, { status: 201 })
 }
@@ -48,7 +53,11 @@ export async function DELETE(request: NextRequest, { params }: Props) {
   if (!parseResult.success)
     return NextResponse.json(parseResult.error.format(), { status: 400 })
 
-  await neynarClient.unlikeCast(user.signer_uuid, parseResult.data.hash)
+  await neynarClient.deleteReactionFromCast(
+    user.signer_uuid,
+    ReactionType.Like,
+    parseResult.data.hash,
+  )
 
   return new Response(null, { status: 204 })
 }

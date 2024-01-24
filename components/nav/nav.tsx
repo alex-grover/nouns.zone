@@ -1,5 +1,6 @@
 'use client'
 
+import { type User } from '@neynar/nodejs-sdk/build/neynar-api/v1'
 import { useModal, useSIWE } from 'connectkit'
 import {
   ExternalLinkIcon,
@@ -11,7 +12,6 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { User } from 'neynar-next/server'
 import { useCallback } from 'react'
 import useSWRImmutable from 'swr/immutable'
 import Button from '@/components/button'
@@ -27,7 +27,7 @@ export default function Nav() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { signOut } = useSIWE()
 
-  const { data } = useSWRImmutable<User>(
+  const { data: user } = useSWRImmutable<User>(
     signer?.status === 'approved' ? `/api/users/${signer.fid}` : null,
   )
 
@@ -54,20 +54,20 @@ export default function Nav() {
     <nav className={styles.nav} data-open={open}>
       <div>
         <div className={styles.header}>
-          {data ? (
+          {user ? (
             <Link
-              href={`/users/${data.username}`}
+              href={`/users/${user.username}`}
               onClick={handleClose}
               className={styles.user}
             >
               <Image
-                src={data.pfp_url}
+                src={user.pfp.url}
                 alt="Profile picture"
                 height="32"
                 width="32"
                 className={styles.avatar}
               />
-              @{data.username}
+              @{user.username}
             </Link>
           ) : (
             <div />

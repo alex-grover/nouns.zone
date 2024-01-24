@@ -1,3 +1,4 @@
+import { FeedType, FilterType } from '@neynar/nodejs-sdk'
 import { NextResponse } from 'next/server'
 import neynarClient from '@/lib/neynar/server'
 
@@ -7,7 +8,9 @@ const NOUNS_PARENT_URL =
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const cursor = searchParams.get('cursor')
-  const feed = await neynarClient.getChannelFeed(NOUNS_PARENT_URL, {
+  const feed = await neynarClient.fetchFeed(FeedType.Filter, {
+    filterType: FilterType.ParentUrl,
+    parentUrl: NOUNS_PARENT_URL,
     cursor: cursor ?? undefined,
   })
   return NextResponse.json(feed)

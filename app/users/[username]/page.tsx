@@ -21,34 +21,32 @@ export default async function UserPage({ params }: UserPageProps) {
         .where('address', '=', address)
         .executeTakeFirst()
     : null
-  const signer = viewer
-    ? await neynarClient.getSigner(viewer.signer_uuid)
-    : null
-  const viewerFid = signer?.status === 'approved' ? signer.fid : null
-  const user = viewerFid
-    ? await neynarClient.getUserByUsername(params.username, viewerFid)
-    : await neynarClient.getUserByUsername(params.username)
+  const signer = viewer && (await neynarClient.lookupSigner(viewer.signer_uuid))
+  const viewerFid = signer?.status === 'approved' ? signer.fid : undefined
+  const {
+    result: { user },
+  } = await neynarClient.lookupUserByUsername(params.username, viewerFid)
 
   return (
     <div className={styles.container}>
       <div className={styles.user}>
         <Image
-          src={user.pfp_url}
+          src={user.pfp.url}
           alt="Profile picture"
           height="96"
           width="96"
           className={styles.pfp}
         />
         <div className={styles.profile}>
-          <div className={styles.name}>{user.display_name}</div>
+          <div className={styles.name}>{user.displayName}</div>
           <div className={styles.username}>@{user.username}</div>
           <div className={styles.follows}>
             <div>
-              <span className={styles.count}>{user.follower_count}</span>
+              <span className={styles.count}>{user.followerCount}</span>
               <span> followers</span>
             </div>
             <div>
-              <span className={styles.count}>{user.following_count}</span>
+              <span className={styles.count}>{user.followingCount}</span>
               <span> following</span>
             </div>
           </div>

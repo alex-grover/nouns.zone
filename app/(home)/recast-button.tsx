@@ -1,6 +1,6 @@
+import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { useModal, useSIWE } from 'connectkit'
 import { RepeatIcon } from 'lucide-react'
-import type { Cast } from 'neynar-next/server'
 import { HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useAccount } from 'wagmi'
@@ -8,7 +8,7 @@ import { useSigner } from '@/lib/neynar/client'
 import styles from './recast-button.module.css'
 
 type RecastButtonProps = HTMLAttributes<HTMLSpanElement> & {
-  cast: Cast
+  cast: CastWithInteractions
 }
 
 export default function RecastButton({ cast, ...props }: RecastButtonProps) {

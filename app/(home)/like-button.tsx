@@ -1,6 +1,6 @@
+import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { useModal, useSIWE } from 'connectkit'
 import { HeartIcon } from 'lucide-react'
-import type { Cast } from 'neynar-next/server'
 import {
   HTMLAttributes,
   useCallback,
@@ -14,7 +14,7 @@ import { useSigner } from '@/lib/neynar/client'
 import styles from './like-button.module.css'
 
 type LikeButtonProps = HTMLAttributes<HTMLSpanElement> & {
-  cast: Cast
+  cast: CastWithInteractions
 }
 
 export default function LikeButton({ cast, ...props }: LikeButtonProps) {

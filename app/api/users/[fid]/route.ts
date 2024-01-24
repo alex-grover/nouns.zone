@@ -16,7 +16,9 @@ export async function GET(_: Request, { params }: Props) {
   const parseResult = paramsSchema.safeParse(params)
   if (!parseResult.success) return NextResponse.json(parseResult.error.format())
 
-  const user = await neynarClient.getUserByFid(parseResult.data.fid)
+  const {
+    result: { user },
+  } = await neynarClient.lookupUserByFid(parseResult.data.fid)
 
   return NextResponse.json(user)
 }

@@ -1,3 +1,7 @@
+import {
+  type CastWithInteractions,
+  type EmbedUrl,
+} from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import * as Popover from '@radix-ui/react-popover'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -9,7 +13,6 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { type Cast } from 'neynar-next/server'
 import { useMemo } from 'react'
 import styles from './cast.module.css'
 import LikeButton from './like-button'
@@ -36,16 +39,16 @@ dayjs.updateLocale('en', {
 })
 
 type CastProps = {
-  cast: Cast
+  cast: CastWithInteractions
 }
 
 export default function Cast({ cast }: CastProps) {
-  const imageEmbedUrls = useMemo(
+  const imageEmbeds = useMemo(
     () =>
-      cast.embeds
-        .filter((embed) => embed.url?.includes('i.imgur.com'))
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        .map((embed) => embed.url!),
+      cast.embeds.filter(
+        (embed): embed is EmbedUrl =>
+          'url' in embed && embed.url.includes('i.imgur.com'),
+      ),
     [cast.embeds],
   )
 
@@ -77,9 +80,9 @@ export default function Cast({ cast }: CastProps) {
             &bull; {dayjs(cast.timestamp).fromNow(true)}
           </span>
           <div className={styles.text}>{cast.text}</div>
-          {imageEmbedUrls.length > 0 && (
+          {imageEmbeds.length > 0 && (
             <div className={styles.embeds}>
-              {imageEmbedUrls.map((url) => (
+              {imageEmbeds.map(({ url }) => (
                 <div key={url} className={styles.embed}>
                   <Image
                     src={url}
