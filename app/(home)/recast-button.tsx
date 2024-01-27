@@ -2,8 +2,8 @@ import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v
 import { RepeatIcon } from 'lucide-react'
 import { type HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import useSession from '@/lib/auth/client'
-import { useSigner } from '@/lib/neynar/client'
+import useSession from '@/lib/session'
+import { useSigner } from '@/lib/signer'
 import styles from './recast-button.module.css'
 
 type RecastButtonProps = HTMLAttributes<HTMLSpanElement> & {

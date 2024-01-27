@@ -7,7 +7,6 @@ import Header from '@/components/header'
 import Nav, { NavProvider } from '@/components/nav'
 import QRCodeDialog from '@/components/qr-code-dialog'
 import FarcasterConfig from '@/lib/farcaster'
-import NeynarProvider from '@/lib/neynar/client'
 import SWRProvider from '@/lib/swr'
 import ThemeProvider from '@/lib/theme'
 import ToastConfig from '@/lib/toast'
@@ -31,17 +30,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className={GeistSans.className}>
         <ThemeProvider>
           <SWRProvider>
-            <NeynarProvider>
-              <FarcasterConfig>
-                <NavProvider>
-                  <Header />
-                  <Nav />
-                  <main className={styles.main}>{children}</main>
-                  <QRCodeDialog />
-                  <ToastConfig />
-                </NavProvider>
-              </FarcasterConfig>
-            </NeynarProvider>
+            <FarcasterConfig>
+              <NavProvider>
+                <Header />
+                <Nav />
+                <main className={styles.main}>{children}</main>
+                <QRCodeDialog />
+                <ToastConfig />
+              </NavProvider>
+            </FarcasterConfig>
           </SWRProvider>
         </ThemeProvider>
         <Analytics />

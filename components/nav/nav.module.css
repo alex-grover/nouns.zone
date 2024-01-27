@@ -63,6 +63,12 @@
   background-color: var(--background-secondary);
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 @media (--tablet-portrait-up) {
   .nav {
     display: block;

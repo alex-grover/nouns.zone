@@ -4,8 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback } from 'react'
 import SignInButton from '@/components/sign-in-button'
-import useSession from '@/lib/auth/client'
-import { useSigner } from '@/lib/neynar/client'
+import useSession from '@/lib/session'
+import { useSigner } from '@/lib/signer'
 import styles from './header-menu.module.css'
 
 export default function HeaderMenu() {
@@ -13,9 +13,13 @@ export default function HeaderMenu() {
   const { clearSigner } = useSigner()
 
   const handleSignOut = useCallback(() => {
-    void signOut()
-    clearSigner()
-    // TODO: clear SWR cache?
+    async function execute() {
+      await signOut()
+      void clearSigner()
+      // TODO: clear SWR cache?
+    }
+
+    void execute()
   }, [signOut, clearSigner])
 
   if (session?.id) {

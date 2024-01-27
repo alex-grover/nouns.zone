@@ -4,20 +4,20 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
-import useSession from '@/lib/auth/client'
-import { useSigner } from '@/lib/neynar/client'
+import useSession from '@/lib/session'
+import { useSigner } from '@/lib/signer'
 import styles from './qr-code-dialog.module.css'
 
 export default function QRCodeDialog() {
   const { session } = useSession()
-  const { signer, signIn } = useSigner()
+  const { signer, isLoading, createSigner } = useSigner()
   const [open, setOpen] = useState(true)
 
   useEffect(() => {
-    if (!session?.id || signer) return
+    if (!session?.id || isLoading || signer) return
     setOpen(true)
-    void signIn()
-  }, [session?.id, signer, signIn])
+    void createSigner()
+  }, [session?.id, signer, createSigner])
 
   if (signer?.status !== 'pending_approval' || !signer.signer_approval_url)
     return null

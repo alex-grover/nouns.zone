@@ -4,7 +4,7 @@ import {
 } from '@farcaster/auth-kit'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
-import useSession from '@/lib/auth/client'
+import useSession from '@/lib/session'
 
 export default function SignInButton() {
   const { session, signIn } = useSession()
@@ -27,9 +27,9 @@ export default function SignInButton() {
 
   const handleError = useCallback(() => toast('Error signing in'), [])
 
-  return session?.id ? (
-    <div></div>
-  ) : (
+  if (session?.id) return null
+
+  return (
     <FarcasterSignInButton onSuccess={handleSuccess} onError={handleError} />
   )
 }

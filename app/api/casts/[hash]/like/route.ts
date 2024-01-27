@@ -2,10 +2,9 @@ import { ReactionType } from '@neynar/nodejs-sdk'
 import { getIronSession } from 'iron-session'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
-import { type SessionData } from '@/lib/auth'
-import { sessionOptions } from '@/lib/auth/server'
+import { type SessionData, sessionOptions } from '@/lib/auth'
 import db from '@/lib/db'
-import neynarClient from '@/lib/neynar/server'
+import neynarClient from '@/lib/neynar'
 import hexString from '@/lib/zod/hex-string'
 
 type Props = {

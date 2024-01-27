@@ -2,9 +2,8 @@ import { getIronSession } from 'iron-session'
 import { ExternalLinkIcon } from 'lucide-react'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
-import { type SessionData } from '@/lib/auth'
-import { sessionOptions } from '@/lib/auth/server'
-import neynarClient from '@/lib/neynar/server'
+import { type SessionData, sessionOptions } from '@/lib/auth'
+import neynarClient from '@/lib/neynar'
 import styles from './page.module.css'
 
 type UserPageProps = {

@@ -1,7 +1,7 @@
 import { FeedType, FilterType } from '@neynar/nodejs-sdk'
 import { type FeedResponse } from '@neynar/nodejs-sdk/build/neynar-api/v2'
 import { NextResponse } from 'next/server'
-import neynarClient from '@/lib/neynar/server'
+import neynarClient from '@/lib/neynar'
 
 const NOUNS_PARENT_URL =
   'chain://eip155:1/erc721:0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03'

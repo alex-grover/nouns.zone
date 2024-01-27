@@ -2,9 +2,8 @@ import { getIronSession } from 'iron-session'
 import { cookies } from 'next/headers'
 import { type NextRequest } from 'next/server'
 import { z } from 'zod'
-import { type SessionData } from '@/lib/auth'
-import { authClient, sessionOptions } from '@/lib/auth/server'
-import neynarClient from '@/lib/neynar/server'
+import { authClient, type SessionData, sessionOptions } from '@/lib/auth'
+import neynarClient from '@/lib/neynar'
 import hexString from '@/lib/zod/hex-string'
 
 export async function GET() {

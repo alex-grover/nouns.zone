@@ -12,8 +12,8 @@ dependencies:
     specifier: ^0.0.22
     version: 0.0.22(viem@1.21.4)
   '@farcaster/auth-kit':
-    specifier: ^0.0.39
-    version: 0.0.39(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4)
+    specifier: ^0.1.4
+    version: 0.1.4(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4)
   '@farcaster/core':
     specifier: ^0.13.4
     version: 0.13.4(typescript@5.2.2)(zod@3.22.4)
@@ -1658,16 +1658,33 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@farcaster/auth-kit@0.0.39(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4):
+  /@farcaster/auth-client@0.1.0(viem@1.21.4):
     resolution:
       {
-        integrity: sha512-RVl4tUn4ftN1ZZKKx1vQ3ZirGHdYNqHPsNZzIHcdcNzwSfiErU1DK+9+pakkrROLlFStEC5jr8yt8QpBFIt9sA==,
+        integrity: sha512-hWeUDwpyNNswclL82K5wt6sA0x0UjELGhLKSZK6JYvGAE6wNR6V8o1IBhZYIGASWHHxOGoJLZ1L1xRcvS3GbUQ==,
+      }
+    peerDependencies:
+      viem: 1.x || 2.x
+    dependencies:
+      ethers: 6.10.0
+      neverthrow: 6.1.0
+      siwe: 2.1.4(ethers@6.10.0)
+      viem: 1.21.4(typescript@5.2.2)(zod@3.22.4)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
+
+  /@farcaster/auth-kit@0.1.4(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4):
+    resolution:
+      {
+        integrity: sha512-+SUdbme/NEcl4E2/ktwhvJMNgU5NHmaHUeCpgtvg8OIu52VvYEL6oChERjNJfVVlzvSub006E9KMC7Iao51tsQ==,
       }
     peerDependencies:
       react: '>= 17'
       react-dom: '>= 17'
     dependencies:
-      '@farcaster/auth-client': 0.0.22(viem@1.21.4)
+      '@farcaster/auth-client': 0.1.0(viem@1.21.4)
       '@vanilla-extract/css': 1.14.0
       qrcode: 1.5.3
       react: 18.2.0

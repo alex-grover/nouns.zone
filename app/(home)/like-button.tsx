@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react'
 import { toast } from 'sonner'
-import useSession from '@/lib/auth/client'
-import { useSigner } from '@/lib/neynar/client'
+import useSession from '@/lib/session'
+import { useSigner } from '@/lib/signer'
 import styles from './like-button.module.css'
 
 type LikeButtonProps = HTMLAttributes<HTMLSpanElement> & {

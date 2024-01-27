@@ -5,11 +5,10 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { fromHex, isHex, toHex } from 'viem'
 import { mnemonicToAccount } from 'viem/accounts'
-import { type SessionData } from '@/lib/auth'
-import { sessionOptions } from '@/lib/auth/server'
+import { type SessionData, sessionOptions } from '@/lib/auth'
 import db from '@/lib/db'
 import env from '@/lib/env'
-import neynarClient from '@/lib/neynar/server'
+import neynarClient from '@/lib/neynar'
 
 export type SignerResponse = Signer
 

@@ -15,15 +15,15 @@ import { toast } from 'sonner'
 import Button from '@/components/button'
 import { useNav } from '@/components/nav/nav-provider'
 import SignInButton from '@/components/sign-in-button'
-import useSession from '@/lib/auth/client'
-import { useSigner } from '@/lib/neynar/client'
+import useSession from '@/lib/session'
+import { useSigner } from '@/lib/signer'
 import styles from './nav.module.css'
 
 export default function Nav() {
   const pathname = usePathname()
   const { open, setOpen } = useNav()
   const { session, signOut } = useSession()
-  const { signer, clearSigner } = useSigner()
+  const { signer, isLoading, clearSigner } = useSigner()
 
   const handleClose = useCallback(() => {
     setOpen(false)
@@ -35,9 +35,8 @@ export default function Nav() {
 
   const handleSignOut = useCallback(() => {
     async function execute() {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       await signOut()
-      clearSigner()
+      void clearSigner()
       // TODO: clear SWR cache?
     }
 
@@ -116,10 +115,14 @@ export default function Nav() {
 
         {!session?.id ? (
           <SignInButton />
-        ) : signer?.status !== 'approved' ? (
-          <Button onClick={handleAddSigner}>TODO: add signer</Button>
         ) : (
-          <Button onClick={handleSignOut}>Sign out</Button>
+          <>
+            {!isLoading && signer?.status !== 'approved' && (
+              // TODO: flashes during loading state
+              <Button onClick={handleAddSigner}>TODO: add signer</Button>
+            )}
+            <Button onClick={handleSignOut}>Sign out</Button>
+          </>
         )}
       </div>
     </nav>
