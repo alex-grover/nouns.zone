@@ -1,4 +1,8 @@
 .button {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
   padding: 8px 24px;
   color: inherit;
   cursor: pointer;

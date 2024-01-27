@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react'
 import { toast } from 'sonner'
+import { useSignerDialog } from '@/components/signer-dialog'
 import useSession from '@/lib/session'
 import { useSigner } from '@/lib/signer'
 import styles from './like-button.module.css'
@@ -19,6 +20,7 @@ type LikeButtonProps = HTMLAttributes<HTMLSpanElement> & {
 export default function LikeButton({ cast, ...props }: LikeButtonProps) {
   const { session } = useSession()
   const { signer, isLoading } = useSigner()
+  const { setOpen } = useSignerDialog()
 
   const hasNoggles = useMemo(() => cast.text.includes('⌐◨-◨'), [cast])
 
@@ -41,7 +43,7 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
     }
 
     if (signer?.status !== 'approved') {
-      toast('TODO: show signer QR code')
+      setOpen(true)
       return
     }
 

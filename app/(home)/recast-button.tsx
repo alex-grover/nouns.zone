@@ -2,6 +2,7 @@ import { type CastWithInteractions } from '@neynar/nodejs-sdk/build/neynar-api/v
 import { RepeatIcon } from 'lucide-react'
 import { type HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { useSignerDialog } from '@/components/signer-dialog'
 import useSession from '@/lib/session'
 import { useSigner } from '@/lib/signer'
 import styles from './recast-button.module.css'
@@ -13,6 +14,7 @@ type RecastButtonProps = HTMLAttributes<HTMLSpanElement> & {
 export default function RecastButton({ cast, ...props }: RecastButtonProps) {
   const { session } = useSession()
   const { signer, isLoading } = useSigner()
+  const { setOpen } = useSignerDialog()
 
   const [signerLoaded, setSignerLoaded] = useState(false)
   const [recasted, setRecasted] = useState(false)
@@ -35,7 +37,7 @@ export default function RecastButton({ cast, ...props }: RecastButtonProps) {
     }
 
     if (signer?.status !== 'approved') {
-      toast('TODO: show signer QR code')
+      setOpen(true)
       return
     }
 

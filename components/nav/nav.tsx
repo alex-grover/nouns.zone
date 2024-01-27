@@ -4,6 +4,8 @@ import {
   ExternalLinkIcon,
   GithubIcon,
   HelpCircleIcon,
+  KeyIcon,
+  LogOutIcon,
   TextIcon,
   XIcon,
 } from 'lucide-react'
@@ -11,10 +13,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback } from 'react'
-import { toast } from 'sonner'
 import Button from '@/components/button'
 import { useNav } from '@/components/nav/nav-provider'
 import SignInButton from '@/components/sign-in-button'
+import { useSignerDialog } from '@/components/signer-dialog'
 import useSession from '@/lib/session'
 import { useSigner } from '@/lib/signer'
 import styles from './nav.module.css'
@@ -24,14 +26,15 @@ export default function Nav() {
   const { open, setOpen } = useNav()
   const { session, signOut } = useSession()
   const { signer, isLoading, clearSigner } = useSigner()
+  const { setOpen: setSignerDialogOpen } = useSignerDialog()
 
   const handleClose = useCallback(() => {
     setOpen(false)
   }, [setOpen])
 
   const handleAddSigner = useCallback(() => {
-    toast('TODO: show signer QR code')
-  }, [])
+    setSignerDialogOpen(true)
+  }, [setSignerDialogOpen])
 
   const handleSignOut = useCallback(() => {
     async function execute() {
@@ -111,17 +114,21 @@ export default function Nav() {
         </ol>
       </div>
       <div className={styles.buttons}>
-        {/* TODO: style like a menu */}
-
         {!session?.id ? (
           <SignInButton />
         ) : (
           <>
             {!isLoading && signer?.status !== 'approved' && (
               // TODO: flashes during loading state
-              <Button onClick={handleAddSigner}>TODO: add signer</Button>
+              <Button onClick={handleAddSigner}>
+                <KeyIcon />
+                <span>Add signer</span>
+              </Button>
             )}
-            <Button onClick={handleSignOut}>Sign out</Button>
+            <Button onClick={handleSignOut}>
+              <LogOutIcon />
+              <span>Sign out</span>
+            </Button>
           </>
         )}
       </div>

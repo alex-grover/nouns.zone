@@ -1,16 +1,22 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { LogOutIcon, UserIcon } from 'lucide-react'
+import { KeyIcon, LogOutIcon, UserIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback } from 'react'
 import SignInButton from '@/components/sign-in-button'
+import { useSignerDialog } from '@/components/signer-dialog'
 import useSession from '@/lib/session'
 import { useSigner } from '@/lib/signer'
 import styles from './header-menu.module.css'
 
 export default function HeaderMenu() {
   const { session, signOut } = useSession()
-  const { clearSigner } = useSigner()
+  const { signer, isLoading, clearSigner } = useSigner()
+  const { setOpen: setSignerDialogOpen } = useSignerDialog()
+
+  const handleAddSigner = useCallback(() => {
+    setSignerDialogOpen(true)
+  }, [setSignerDialogOpen])
 
   const handleSignOut = useCallback(() => {
     async function execute() {
@@ -36,6 +42,14 @@ export default function HeaderMenu() {
           @{session.username}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className={styles.menu}>
+          {!isLoading && signer?.status !== 'approved' && (
+            <DropdownMenu.Item asChild>
+              <button className={styles.item} onClick={handleAddSigner}>
+                <KeyIcon />
+                <span>Add signer</span>
+              </button>
+            </DropdownMenu.Item>
+          )}
           <DropdownMenu.Item asChild>
             <Link href={`/users/${session.username}`} className={styles.item}>
               <UserIcon />

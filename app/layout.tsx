@@ -5,7 +5,7 @@ import { type Metadata } from 'next'
 import { type PropsWithChildren } from 'react'
 import Header from '@/components/header'
 import Nav, { NavProvider } from '@/components/nav'
-import QRCodeDialog from '@/components/qr-code-dialog'
+import SignerDialog, { SignerDialogProvider } from '@/components/signer-dialog'
 import FarcasterConfig from '@/lib/farcaster'
 import SWRProvider from '@/lib/swr'
 import ThemeProvider from '@/lib/theme'
@@ -32,11 +32,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <SWRProvider>
             <FarcasterConfig>
               <NavProvider>
-                <Header />
-                <Nav />
-                <main className={styles.main}>{children}</main>
-                <QRCodeDialog />
-                <ToastConfig />
+                <SignerDialogProvider>
+                  <Header />
+                  <Nav />
+                  <main className={styles.main}>{children}</main>
+                  <SignerDialog />
+                  <ToastConfig />
+                </SignerDialogProvider>
               </NavProvider>
             </FarcasterConfig>
           </SWRProvider>
