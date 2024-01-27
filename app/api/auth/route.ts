@@ -1,15 +1,17 @@
 import { getIronSession } from 'iron-session'
 import { cookies } from 'next/headers'
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { authClient, type SessionData, sessionOptions } from '@/lib/auth'
 import neynarClient from '@/lib/neynar'
 import hexString from '@/lib/zod/hex-string'
 
+export type SessionResponse = SessionData
+
 export async function GET() {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions)
   if (!session.id) return Response.json({})
-  return Response.json(session)
+  return NextResponse.json<SessionResponse>(session)
 }
 
 const loginSchema = z.object({
@@ -52,11 +54,11 @@ export async function POST(request: NextRequest) {
 
   await session.save()
 
-  return Response.json(session, { status: 201 })
+  return NextResponse.json<SessionResponse>(session, { status: 201 })
 }
 
 export async function DELETE() {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions)
   session.destroy()
-  return Response.json({}, { status: 202 })
+  return NextResponse.json<SessionResponse>({}, { status: 202 })
 }
