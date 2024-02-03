@@ -12,8 +12,8 @@ dependencies:
     specifier: ^0.0.22
     version: 0.0.22(viem@1.21.4)
   '@farcaster/auth-kit':
-    specifier: ^0.1.4
-    version: 0.1.4(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4)
+    specifier: ^0.2.0
+    version: 0.2.0(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4)
   '@farcaster/core':
     specifier: ^0.13.4
     version: 0.13.4(typescript@5.2.2)(zod@3.22.4)
@@ -1675,10 +1675,10 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@farcaster/auth-kit@0.1.4(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4):
+  /@farcaster/auth-kit@0.2.0(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)(viem@1.21.4):
     resolution:
       {
-        integrity: sha512-+SUdbme/NEcl4E2/ktwhvJMNgU5NHmaHUeCpgtvg8OIu52VvYEL6oChERjNJfVVlzvSub006E9KMC7Iao51tsQ==,
+        integrity: sha512-yWPCZ4OWhCaaC0n9vCmOQEOoCRkClcoTXUVQX0oBuZExMi7K32j9LI+gy25+yAwQhVEeCBhnvTj9VoaJrBB1gA==,
       }
     peerDependencies:
       react: '>= 17'

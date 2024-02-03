@@ -20,7 +20,7 @@
   "dependencies": {
     "@alex-grover/styles": "^0.0.1",
     "@farcaster/auth-client": "^0.0.22",
-    "@farcaster/auth-kit": "^0.1.4",
+    "@farcaster/auth-kit": "^0.2.0",
     "@farcaster/core": "^0.13.4",
     "@neynar/nodejs-sdk": "^1.7.0",
     "@radix-ui/react-dialog": "^1.0.5",
