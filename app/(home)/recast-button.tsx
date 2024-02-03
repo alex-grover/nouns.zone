@@ -57,7 +57,7 @@ export default function RecastButton({ cast, ...props }: RecastButtonProps) {
     }
 
     void execute()
-  }, [session?.id, signer?.status, cast.hash])
+  }, [session?.id, signer?.status, setOpen, cast.hash])
 
   const handleUnrecast = useCallback(() => {
     async function execute() {

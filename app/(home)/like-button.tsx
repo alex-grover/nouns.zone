@@ -63,7 +63,7 @@ export default function LikeButton({ cast, ...props }: LikeButtonProps) {
     }
 
     void execute()
-  }, [session?.id, signer?.status, cast.hash])
+  }, [session?.id, signer?.status, setOpen, cast.hash])
 
   const handleUnlike = useCallback(() => {
     async function execute() {

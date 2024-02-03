@@ -1,13 +1,15 @@
 import {
   SignInButton as FarcasterSignInButton,
   type StatusAPIResponse,
+  useProfile,
 } from '@farcaster/auth-kit'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
 import useSession from '@/lib/session'
 
 export default function SignInButton() {
-  const { session, signIn } = useSession()
+  const { isAuthenticated } = useProfile()
+  const { session, isLoading, signIn } = useSession()
 
   const handleSuccess = useCallback(
     (res: StatusAPIResponse) => {
@@ -27,9 +29,13 @@ export default function SignInButton() {
 
   const handleError = useCallback(() => toast('Error signing in'), [])
 
-  if (session?.id) return null
+  if (isLoading || isAuthenticated || session?.id) return null
 
   return (
-    <FarcasterSignInButton onSuccess={handleSuccess} onError={handleError} />
+    <FarcasterSignInButton
+      onSuccess={handleSuccess}
+      onError={handleError}
+      hideSignOut
+    />
   )
 }

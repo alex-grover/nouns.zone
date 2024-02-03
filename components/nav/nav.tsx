@@ -119,7 +119,6 @@ export default function Nav() {
         ) : (
           <>
             {!isLoading && signer?.status !== 'approved' && (
-              // TODO: flashes during loading state
               <Button onClick={handleAddSigner}>
                 <KeyIcon />
                 <span>Add signer</span>
